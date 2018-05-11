@@ -1,0 +1,21 @@
+{% extends 'Golf/blank.html' %}
+
+{% block content %}
+
+{% if latest_round_list %}
+    <ul>
+    {% for round in latest_round_list %}
+        <li><a href="/Golf/{{ round.id }}/">
+          {{ round.print_round }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No rounds are available.</p>
+{% endif %}
+
+<script>
+
+
+</script>
+
+{% endblock %}
