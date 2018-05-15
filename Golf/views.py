@@ -9,3 +9,8 @@ def index(request):
     latest_round_list = Round.objects.order_by('-date')[:5]
     context = {'latest_round_list': latest_round_list}
     return render(request, 'Golf/index.html', context)
+
+def test(request):
+    latest_round_list = Round.objects.order_by('-date')[:5]
+    context = {'latest_round_list': latest_round_list}
+    return render(request, 'Golf/test.html', context)
