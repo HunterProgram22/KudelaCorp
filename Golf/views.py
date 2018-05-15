@@ -8,7 +8,7 @@ from .models import Round
 def index(request):
     latest_round_list = Round.objects.order_by('-date')[:5]
     context = {'latest_round_list': latest_round_list}
-    return render(request, 'Golf/index.html', context)
+    return render(request, 'Golf/GolfBase.html', context)
 
 def test(request):
     latest_round_list = Round.objects.order_by('-date')[:5]

@@ -1,5 +1,41 @@
 {% extends 'KudelaCorp/AppBase.html' %}
 
-{% block title %}Testing TEST Again{% endblock %}
+{% block title %}Golf Home{% endblock %}
 
-{% block linkTest %}<a href="/test/">Test Page</a>{% endblock %}
+{% block style %}
+#mainNav.navbar-dark .navbar-collapse .navbar-sidenav {
+  background: #1f9ca6!important;
+}
+
+.bg-dark {
+  background-color: #1f9ca6!important;
+}
+
+#mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item > .nav-link {
+    color: black!important;
+}
+{% endblock %}
+
+
+<!-- Navigation-->
+{% block navbar-brand-link %}<a class="navbar-brand" href="/Golf/">{% endblock %}
+{% block navbar-brand-title %}Golf{% endblock %}</a>
+
+{% block linkHTML %}<a href="Golf/test/">{% endblock %}
+{% block linkTest %}Test Page{% endblock %}
+
+{% block navbar-link-one %}<a class="nav-link" href="/Golf/">{% endblock %}
+{% block navbar-link-one-icon %}<i class="fa fa-fw fa-dashboard"></i>{% endblock %}
+{% block navbar-link-one-label %}Dashboard{% endblock %}
+
+{% block navbar-link-two %}<a class="nav-link" href="/Golf/Stats/">{% endblock %}
+{% block navbar-link-two-icon %}<i class="fa fa-fw fa-area-chart"></i>{% endblock %}
+{% block navbar-link-two-label %}Stats{% endblock %}
+
+{% block navbar-link-three %}<a class="nav-link" href="/Golf/Stats/">{% endblock %}
+{% block navbar-link-three-icon %}<i class="fa fa-fw fa-area-chart"></i>{% endblock %}
+{% block navbar-link-three-label %}TESTTHREE{% endblock %}
+
+{% block navbar-link-four %}{% endblock %}
+{% block navbar-link-four-icon %}{% endblock %}
+{% block navbar-link-four-label %}{% endblock %}
