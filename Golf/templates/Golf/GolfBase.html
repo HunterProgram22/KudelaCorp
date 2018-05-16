@@ -18,24 +18,28 @@
 
 
 <!-- Navigation-->
-{% block navbar-brand-link %}<a class="navbar-brand" href="/Golf/">{% endblock %}
-{% block navbar-brand-title %}Golf{% endblock %}</a>
+{% block navbar-brand-link %}{% url 'Golf_Home' %}{% endblock %}
+{% block navbar-brand-title %}Golf{% endblock %}
 
-{% block linkHTML %}<a href="Golf/test/">{% endblock %}
-{% block linkTest %}Test Page{% endblock %}
-
-{% block navbar-link-one %}<a class="nav-link" href="/Golf/">{% endblock %}
-{% block navbar-link-one-icon %}<i class="fa fa-fw fa-dashboard"></i>{% endblock %}
+{% block navbar-link-one %}{% url 'Golf_Home' %}{% endblock %}
+{% block navbar-link-one-icon %}fa fa-fw fa-dashboard{% endblock %}
 {% block navbar-link-one-label %}Dashboard{% endblock %}
 
-{% block navbar-link-two %}<a class="nav-link" href="/Golf/Stats/">{% endblock %}
-{% block navbar-link-two-icon %}<i class="fa fa-fw fa-area-chart"></i>{% endblock %}
-{% block navbar-link-two-label %}Stats{% endblock %}
+{% block navbar-link-two %}{% url 'Golf_Manage' %}{% endblock %}
+{% block navbar-link-two-icon %}fa fa-fw fa-edit{% endblock %}
+{% block navbar-link-two-label %}Manage{% endblock %}
 
-{% block navbar-link-three %}<a class="nav-link" href="/Golf/Stats/">{% endblock %}
-{% block navbar-link-three-icon %}<i class="fa fa-fw fa-area-chart"></i>{% endblock %}
-{% block navbar-link-three-label %}TESTTHREE{% endblock %}
+{% block navbar-link-three %}{% url 'Golf_Rounds9' %}{% endblock %}
+{% block navbar-link-three-icon %}fa fa-fw fa-area-chart{% endblock %}
+{% block navbar-link-three-label %}9-Hole Rounds{% endblock %}
 
-{% block navbar-link-four %}{% endblock %}
-{% block navbar-link-four-icon %}{% endblock %}
-{% block navbar-link-four-label %}{% endblock %}
+{% block navbar-link-four %}{% url 'Golf_Rounds18' %}{% endblock %}
+{% block navbar-link-four-icon %}fa fa-fw fa-area-chart{% endblock %}
+{% block navbar-link-four-label %}18-Hole Rounds{% endblock %}
+
+
+<!-- /.container-fluid-->
+{% block content %}
+<h1>TEST</h1>
+{% endblock %}
+<!-- /.content-wrapper-->
