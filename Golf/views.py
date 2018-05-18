@@ -35,3 +35,37 @@ class Handicap(View):
     def get(self, request):
         context = None
         return render(request, 'Golf/Handicap.html', context)
+
+
+class NewRound(View):
+    def post(self, request):
+        # form = RoundForm(request.POST)
+        # if form.is_valid():
+        #     round = form.save()
+        #     # Add user save at later point here
+        #     round.save()
+        #     return redirect('Golf_Manage')
+        context = None # {'form': form}
+        return render(request, 'Golf/NewRound.html', context)
+
+    def get(self, request):
+        # form = RoundForm()
+        context = None #{'form': form}
+        return render(request, 'Golf/NewRound.html', context)
+
+
+class NewCourse(View):
+    def post(self, request):
+        # form = CourseForm(request.POST)
+        # if form.is_valid():
+        #     course = form.save()
+        #     # Add user save at later point here
+        #     course.save()
+        #     return redirect('Golf_Manage')
+        context = None # {'form': form}
+        return render(request, 'Golf/NewCourse.html', context)
+
+    def get(self, request):
+        # form = CourseForm()
+        context = None #{'form': form}
+        return render(request, 'Golf/NewCourse.html', context)
