@@ -11,4 +11,3 @@ urlpatterns = [
     path('Golf/NewRound/', login_required(NewRound.as_view()), name='Golf_NewRound'),
     path('Golf/NewCourse/', login_required(NewCourse.as_view()), name='Golf_NewCourse'),
 ]
-#Test
