@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import MonthBal, MonthInc
 
-# Register your models here.
+admin.site.register(MonthBal)
+admin.site.register(MonthInc)

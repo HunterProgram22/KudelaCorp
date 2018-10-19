@@ -1,0 +1,109 @@
+{% extends 'Finance/base.html' %}
+
+{% block content %}
+{% load humanize %}
+
+<style>
+td, th {
+  padding-right: 2px;
+  padding-left: 2px;
+}
+
+.blank_row {
+    height: 10px;
+}
+
+#content {
+  float: left;
+  width: 100px;
+  background-color: #fff;
+  text-align: right;
+  margin-right: 15px;
+}
+#accountnames {
+  float: left;
+  width: 225px;
+  background-color: #fff;
+}
+#cleared {
+  clear: both;
+}
+
+#dollar, #plus, #minus {
+    float: left;
+}
+#instructions {
+    font-size: 11px;
+    margin: 2px;
+    width: 315px;
+}
+</style>
+<h1>Cashflow Statement</h1>
+<div id="searchform">
+<form action="{% url 'Financecash' %}" method="POST">{% csrf_token %}
+<select name="month">
+    <option value=''>--Select Month--</option>
+    <option value='1'>January</option>
+    <option value='2'>February</option>
+    <option value='3'>March</option>
+    <option value='4'>April</option>
+    <option value='5'>May</option>
+    <option value='6'>June</option>
+    <option value='7'>July</option>
+    <option value='8'>August</option>
+    <option value='9'>September</option>
+    <option value='10'>October</option>
+    <option value='11'>November</option>
+    <option value='12'>December</option>
+</select>
+<select name="year">
+    <option value=''>--Select Year--</option>
+    <option value='2017'>2017</option>
+    <option value='2016'>2016</option>
+    <option value='2015'>2015</option>
+    <option value='2014'>2014</option>
+    <option value='2013'>2013</option>
+</select>
+<br>
+<input type="submit">
+</form>
+</div>
+<div id='instructions'>
+    <p>If you select a month and year data for that specific month is shown next
+    to the most current month. Selecting only a month returns all months for any year,
+    (i.e. January returns Jan. 2013, Jan. 2014, Jan. 2015, etc.) and similarly
+    selecting only a year returns all months for that year.</p>
+</div>
+
+    <div id="accountnames">
+        <table width="100%" style="border: 2px solid black;">
+            <tr style="border: 1px solid black;"><th>Date</th></tr>
+            <tr><th>Available Job Income</th></tr>
+            <tr><th>Non-taxable Income</th></tr>
+            <tr><th>Total Cash Available</th></tr>
+            <tr><th>Monthly Expenditures</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><th>Surplus/Deficit</th></tr>
+
+        </table>
+    </div>
+
+    {% for field in month_cash %}
+    <div id="content">
+        <table width="100%" style="border: 2px solid black; padding: 2px;">
+
+            <tr style="text-align: center; border: 1px solid black;"><td>
+            <b>{{ field.date | date:"M Y" }}</b>
+            </td></tr>
+            <tr><td>{{ field.available_job_income | intcomma }}</td></tr>
+            <tr><td><u><span id="plus">+</span>{{ field.total_nontaxable_income | intcomma }}</u></td></tr>
+            <tr><td>{{ field.cash_available | intcomma }}</td></tr>
+            <tr><td><u><span id="minus">-</span>{{ field.total_expenditures | intcomma }}</u></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="totalrow"><td><b><span id="dollar">$</span>{{ field.cashflow | intcomma }}</b></td></tr>
+
+
+        </table>
+    </div>
+    {% endfor %}
+{% endblock %}

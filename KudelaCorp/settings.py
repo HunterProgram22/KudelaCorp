@@ -32,9 +32,11 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'Golf.apps.GolfConfig',
+    'Finance.apps.FinanceConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.humanize',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -108,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Detroit'
 
 USE_I18N = True
 

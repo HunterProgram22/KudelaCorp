@@ -1,0 +1,215 @@
+{% extends 'Finance/base.html' %}
+
+{% load humanize %}
+
+{% block content %}
+<style>
+button, input {
+    padding: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+form {
+    padding: 2px;
+    border: 2px gray solid;
+    width: 315px;
+}
+
+td, th {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.blank_row {
+    height: 10px;
+}
+
+#content {
+  float: left;
+  width: 100px;
+  background-color: #fff;
+  text-align: right;
+  margin-right: 15px;
+}
+#accountnames {
+  float: left;
+  width: 225px;
+  margin-right: -10px;
+  background-color: #fff;
+}
+#cleared {
+  clear: both;
+}
+
+#dollar {
+    float: left;
+}
+
+#instructions {
+    font-size: 11px;
+    margin: 2px;
+    width: 315px;
+}
+</style>
+<h1>Balance Sheet</h1>
+
+<div id="searchform">
+<form action="{% url 'Financebalance' %}" method="POST">{% csrf_token %}
+<select name="month">
+    <option value=''>--Select Month--</option>
+    <option value='1'>January</option>
+    <option value='2'>February</option>
+    <option value='3'>March</option>
+    <option value='4'>April</option>
+    <option value='5'>May</option>
+    <option value='6'>June</option>
+    <option value='7'>July</option>
+    <option value='8'>August</option>
+    <option value='9'>September</option>
+    <option value='10'>October</option>
+    <option value='11'>November</option>
+    <option value='12'>December</option>
+</select>
+<select name="year">
+    <option value=''>--Select Year--</option>
+    <option value='2018'>2018</option>
+    <option value='2017'>2017</option>
+    <option value='2016'>2016</option>
+    <option value='2015'>2015</option>
+    <option value='2014'>2014</option>
+    <option value='2013'>2013</option>
+    <option value='2012'>2012</option>
+</select>
+<br>
+<input type="submit">
+</form>
+</div>
+<div id='instructions'>
+    <p>If you select a month and year data for that specific month is shown next
+    to the most current month. Selecting only a month returns all months for any year,
+    (i.e. January returns Jan. 2013, Jan. 2014, Jan. 2015, etc.) and similarly
+    selecting only a year returns all months for that year.</p>
+</div>
+<div>
+<button onclick="myFunction()">Show/Hide Detail</button>
+</div>
+
+    <div id="accountnames">
+        <table width="100%" style="border: 2px solid black;">
+            <tr style="border: 1px solid black;"><th>Date</th></tr>
+            <tr class="detail"><th>Fifth Third Checking</th></tr>
+            <tr class="detail"><th>Huntington Checking</th></tr>
+            <tr><th>Total Checking</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><th>Huntington Savings</th></tr>
+            <tr class="detail"><th>Fifth Third Savings</th></tr>
+            <tr class="detail"><th>Capital One Savings</th></tr>
+            <tr class="detail"><th>American Express Savings</th></tr>
+            <tr><th>Total Savings</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><th>Robinhood Investment</th></tr>
+            <tr class="detail"><th>Deacon Schwab Investment</th></tr>
+            <tr class="detail"><th>Buckeye Schwab Investment</th></tr>
+            <tr><th>Total Investments</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><th>OPERS Pension</th></tr>
+            <tr class="detail"><th>Vanguard 401(k)</th></tr>
+            <tr class="detail"><th>Vanguard Roth IRA</th></tr>
+            <tr class="detail"><th>Ohio 457(b)</th></tr>
+            <tr><th>Total Retirement</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><th>Justin's Car</th></tr>
+            <tr class="detail"><th>Kat's Car</th></tr>
+            <tr class="detail"><th>Home</th></tr>
+            <tr><th>Total Physical Assets</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><th>TOTAL ASSETS</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><th>American Express CC</th></tr>
+            <tr class="detail"><th>Discover CC</th></tr>
+            <tr class="detail"><th>Capital One CC</th></tr>
+            <tr><th>Total Credit Cards</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><th>Car Loan</th></tr>
+            <tr class="detail"><th>Private Student Loan</th></tr>
+            <tr class="detail"><th>Government Student Loan</th></tr>
+            <tr><th>Total Loans</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><th>Home Mortgage</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><th>TOTAL LIABILITIES</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><th>NET WORTH</th></tr>
+
+        </table>
+    </div>
+    {% for field in month_balance %}
+    <div id="content">
+        <table width="100%" style="border: 2px solid black;">
+
+            <tr style="text-align: center; border: 1px solid black;"><td>
+            <b>{{ field.date | date:"M Y" }}</b>
+            </td></tr>
+            <tr class="detail"><td>{{ field.fifththird_check | intcomma }}</td></tr>
+            <tr class="detail"><td><u>{{ field.huntington_check | intcomma }}</u></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.total_check | intcomma }}</b></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><td>{{ field.huntington_save | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.fifththird_save | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.capone_save | intcomma }}</td></tr>
+            <tr class="detail"><td><u>{{ field.amex_save | intcomma }}</u></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.total_save | intcomma }}</b></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><td>{{ field.robinhood_invest | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.deacon_invest | intcomma }}</td></tr>
+            <tr class="detail"><td><u>{{ field.buckeye_invest | intcomma }}</u></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.total_invest | intcomma }}</b></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><td>{{ field.opers_retire | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.four01_retire | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.roth_retire | intcomma }}</td></tr>
+            <tr class="detail"><td><u>{{ field.four57_retire | intcomma }}</u></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.total_retire | intcomma }}</b></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><td>{{ field.justin_car | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.kat_car| intcomma }}</td></tr>
+            <tr class="detail"><td><u>{{ field.main_home | intcomma }}</u></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.total_physical | intcomma }}</b></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.total_assets | intcomma }}</b></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><td>{{ field.amex_credit | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.discover_credit | intcomma }}</td></tr>
+            <tr class="detail"><td><u>{{ field.capone_credit | intcomma }}</u></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.total_credit | intcomma }}</b></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><td>{{ field.car_loan | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.privstudent_loan | intcomma }}</td></tr>
+            <tr class="detail"><td><u>{{ field.pubstudent_loan| intcomma }}</u></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.total_loan | intcomma }}</b></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><td>{{ field.main_mortgage | intcomma }}</td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.total_liabilities | intcomma }}</b></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.networth | intcomma }}</b></td></tr>
+
+        </table>
+    </div>
+
+   <script>
+    function myFunction() {
+    var x = document.getElementsByClassName('detail');
+    var i;
+    for (i = 0; i < x.length; i++){
+        if (x[i].style.display === 'none') {
+            x[i].style.display = 'table-row';
+        } else {
+            x[i].style.display = 'none';
+        }
+    }
+    }
+    </script>
+    {% endfor %}
+{% endblock %}

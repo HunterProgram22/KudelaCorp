@@ -1,0 +1,14 @@
+{% extends 'Finance/base.html' %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+
+    <h1>New Monthly Balance Sheet</h1>
+    <form method="POST" class="balance-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+
+{% endblock %}

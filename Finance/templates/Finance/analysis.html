@@ -1,0 +1,80 @@
+{% extends 'Finance/base.html' %}
+
+{% load humanize %}
+
+{% block content %}
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+
+            ['Month', '{{ category }}',],
+            {% for field in send_data %}
+
+                {% if year == 'ALL' %}
+                ['{{ field.0 | date:'M y' }}',  {v:{{ field.1 }}, f:'${{ field.1 }}' },],
+                {% else %}
+                ['{{ field.0 | date:'M' }}',  {v:{{ field.1 }}, f:'${{ field.1 }}' },],
+                {% endif %}
+
+          {% endfor %}
+        ]);
+
+        var options = {
+          title: '{{ year }} {{ category }}',
+          curveType: '',
+          legend: { position: 'bottom' },
+          vAxis: { format: 'currency' },
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+</head>
+
+<h1>Data Analysis Central</h1>
+<div id="searchform">
+<form action="{% url 'Financeanalysis' %}" method="POST">{% csrf_token %}
+<select name="year">
+    <option value=''>--Select Year--</option>
+    <option value='2018'>2018</option>
+    <option value='2017'>2017</option>
+    <option value='2016'>2016</option>
+    <option value='2015'>2015</option>
+    <option value='2014'>2014</option>
+    <option value='2013'>2013</option>
+    <option value='ALL'>All time</option>
+</select>
+<br>
+<select name="category">
+    <option value=''>--Select Category--</option>
+    <option value='total_grossjob_income'>Total Job Salary</option>
+    <option value='schwab_dividends'>Schwab Dividends</option>
+    <option value='expense_checks'>Expense Checks</option>
+    <option value='aep_electric' name="AEP Electric">AEP Electric</option>
+    <option value='suburban_gas'>Suburban Gas</option>
+    <option value='total_utilities'>Total Utilities</option>
+    <option value='total_personal_creditcards'>Total Personal Credit Cards</option>
+    <option value='public_loan'>Government Loan</option>
+    <option value='cashorcheck_purchases'>Cash or Check Purchases</option>
+    <option value='daycare'>Daycare</option>
+    <option value='total_allsavings'>Total All Savings</option>
+    <option value='total_expenditures'>Total All Expenditures</options>
+</select>
+<br>
+<input type="submit">
+</form>
+</div>
+
+  <body>
+    <div id="curve_chart" style="width: 900px; height: 500px"></div>
+  </body>
+
+
+{% endblock %}

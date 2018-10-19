@@ -1,0 +1,195 @@
+{% extends 'Finance/base.html' %}
+
+{% load humanize %}
+
+{% block content %}
+<head>
+<style>
+
+table {
+    border: 2px black solid;
+    width: 100%;
+}
+
+td, th {
+    text-align: right;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.heading {
+    text-align: left;
+    width: auto;
+}
+s
+.toprow, .bottomrow {
+    border: 1px solid black;
+}
+
+#sigblock {
+    line-height: 14px;
+}
+
+@media(min-width:768px) {
+#reportsheet {
+    width: 700px;
+}
+}
+</style>
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Quarter', 'Personal Spending', 'Loan Payments', 'Savings'],
+          ['{{ current_quarter_report_name }}', {{ current_quarter_report.0 }}, {{ current_quarter_report.2 }}, {{ current_quarter_report.3 }}],
+          ['{{ last_quarter_report_name}}', {{ last_quarter_report.0 }}, {{ last_quarter_report.2 }}, {{ last_quarter_report.3 }}],
+          ['{{ yearago_quarter_report_name }}', {{ yearago_quarter_report.0 }}, {{ yearago_quarter_report.2 }}, {{ yearago_quarter_report.3 }}],
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Quarterly Comparison',
+            subtitle: 'Report for {{ current_quarter_report_name }}',
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, options);
+      }
+    </script>
+</head>
+
+<body>
+<h1>Quarterly Reports</h1>
+<div id="searchform">
+<form action="{% url 'Financereports' %}" method="POST">{% csrf_token %}
+<select name="quarter">
+    <option value=''>--Select Quarter--</option>
+    <option value='2/2018'>2nd Quarter 2018</option>
+    <option value='1/2018'>1st Quarter 2018</option>
+    <option value='4/2017'>4th Quarter 2017</option>
+    <option value='3/2017'>3rd Quarter 2017</option>
+    <option value='2/2017'>2nd Quarter 2017</option>
+    <option value='1/2017'>1st Quarter 2017</option>
+    <option value='4/2016'>4th Quarter 2016</option>
+    <option value='3/2016'>3rd Quarter 2016</option>
+    <option value='2/2016'>2nd Quarter 2016</option>
+    <option value='1/2016'>1st Quarter 2016</option>
+    <option value='4/2015'>4th Quarter 2015</option>
+    <option value='3/2015'>3rd Quarter 2015</option>
+    <option value='2/2015'>2nd Quarter 2015</option>
+    <option value='1/2015'>1st Quarter 2015</option>
+    <option value='4/2014'>4th Quarter 2014</option>
+    <option value='3/2014'>3rd Quarter 2014</option>
+    <option value='2/2014'>2nd Quarter 2014</option>
+    <option value='1/2014'>1st Quarter 2014</option>
+    <option value='4/2013'>4th Quarter 2013</option>
+    <option value='3/2013'>3rd Quarter 2013</option>
+    <option value='2/2013'>2nd Quarter 2013</option>
+    <option value='1/2013'>1st Quarter 2013</option>
+</select>
+<br>
+<input type="submit">
+</form>
+</div>
+
+
+<h2>The Kudela Partnership {{ current_quarter_report_name }} Report</h2>
+
+<div id="reportsheet">
+<p>A summary of the financial data for {{ current_quarter_report_name }} is as follows:</p>
+
+<p>The Net Worth of the Kudela Partnership at the close of the quarter was:
+   <b>${{ current_quarter_report.5 | intcomma}}</b>.</p>
+
+<p>A comparison of spending and saving for {{ current_quarter_report_name }} as compared to {{ last_quarter_report_name }}
+and {{ yearago_quarter_report_name }} is presented below. Please note that the numbers
+are not inclusive of all categories from the monthly income statements. For specific
+details please refer to the income statements page.</p>
+
+<table>
+<tr class='toprow'>
+    <th class='heading'>Category</th>
+    <th>{{ current_quarter_report_name }}</th>
+    <th>{{ last_quarter_report_name }}</th>
+    <th>{{ yearago_quarter_report_name }}</th>
+</tr>
+<tr>
+    <td class='heading'>Personal Spending</td>
+    <td>$&nbsp;{{ current_quarter_report.0 | intcomma }}</td>
+    <td>$&nbsp;{{ last_quarter_report.0 | intcomma }}</td>
+    <td>$&nbsp;{{ yearago_quarter_report.0 | intcomma }}</td>
+</tr>
+<tr>
+    <td class='heading'>Utilities</td>
+    <td>$&nbsp;{{ current_quarter_report.1 | intcomma }}</td>
+    <td>$&nbsp;{{ last_quarter_report.1 | intcomma }}</td>
+    <td>$&nbsp;{{ yearago_quarter_report.1 | intcomma }}</td>
+</tr>
+<tr>
+    <td class='heading'>Loan Payments</td>
+    <td>$&nbsp;{{ current_quarter_report.2 | intcomma }}</td>
+    <td>$&nbsp;{{ last_quarter_report.2 | intcomma }}</td>
+    <td>$&nbsp;{{ yearago_quarter_report.2 | intcomma }}</td>
+</tr>
+<tr>
+    <td class='heading'>Total Savings</td>
+    <td>$&nbsp;{{ current_quarter_report.3 | intcomma }}</td>
+    <td>$&nbsp;{{ last_quarter_report.3 | intcomma }}</td>
+    <td>$&nbsp;{{ yearago_quarter_report.3 | intcomma }}</td>
+</tr>
+<tr class='bottomrow'>
+    <td class='heading'>Surplus/Deficit</td>
+    <td>$&nbsp;{{ current_quarter_report.4 | intcomma }}</td>
+    <td>$&nbsp;{{ last_quarter_report.4 | intcomma }}</td>
+    <td>$&nbsp;{{ yearago_quarter_report.4 | intcomma }}</td>
+</tr>
+
+</table><br>
+
+<div id="columnchart_material" style="width: 100%; height: 333px;"></div>
+<br><br>
+
+<p>A comparison of certain account balances for {{ current_quarter_report_name }}
+as compared to {{ last_quarter_report_name }} and {{ yearago_quarter_report_name }} is presented below.</p>
+
+<table>
+<tr class='toprow'>
+    <th class='heading'>Category</th>
+    <th>{{ current_quarter_report_name }}</th>
+    <th>{{ last_quarter_report_name }}</th>
+    <th>{{ yearago_quarter_report_name }}</th>
+</tr>
+<tr>
+    <td class='heading'>Net Worth</td>
+    <td>$&nbsp;{{ current_quarter_report.5 | intcomma }}</td>
+    <td>$&nbsp;{{ last_quarter_report.5 | intcomma }}</td>
+    <td>$&nbsp;{{ yearago_quarter_report.5 | intcomma }}</td>
+</tr>
+<tr>
+    <td class='heading'>Loan Balance</td>
+    <td>$&nbsp;{{ current_quarter_report.6 | intcomma }}</td>
+    <td>$&nbsp;{{ last_quarter_report.6 | intcomma }}</td>
+    <td>$&nbsp;{{ yearago_quarter_report.6 | intcomma }}</td>
+</tr>
+<tr>
+    <td class='heading'>Savings Balance</td>
+    <td>$&nbsp;{{ current_quarter_report.7 | intcomma }}</td>
+    <td>$&nbsp;{{ last_quarter_report.7 | intcomma }}</td>
+    <td>$&nbsp;{{ yearago_quarter_report.7 | intcomma }}</td>
+</tr>
+</table>
+<br><br>
+<div id='sigblock'>
+<p>Prepared and submitted by,</p>
+<p><b>JUSTIN T. KUDELA</b></p>
+<p>Co-Chairman</p>
+</div>
+<br><br><br>
+</div>
+</body>
+{% endblock %}
