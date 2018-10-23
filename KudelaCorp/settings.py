@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'Golf.apps.GolfConfig',
     'Finance.apps.FinanceConfig',
+    'Options.apps.OptionsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
