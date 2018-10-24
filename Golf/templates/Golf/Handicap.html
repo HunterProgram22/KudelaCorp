@@ -3,3 +3,69 @@
 {% block title %}Golf - Handicap{% endblock %}
 
 {% block pagecontent %}Golf - Handicap{% endblock %}
+
+
+{% block content %}
+<style>
+
+th, td {
+    text-align: center;
+}
+
+.leftround {
+    text-align: left;
+}
+
+</style>
+
+<h1>Round Handicap Data</h1>
+
+<h2>18-Hole Handicap</h2>
+<table style="border: 3px solid black;">
+<tr style="border: 1px solid black;">
+    <th>Round</th>
+    <th> </th>
+    <th>Handicap <br> Differential</th>
+    <th> </th>
+    <th>Handicap</th>
+</tr>
+
+{% for handicap in round_handicap_18 %}
+<tr>
+    <td class='leftround'>{{ handicap.0 }}</td>
+    <td>&nbsp; &nbsp; &nbsp;</td>
+    <td>{{ handicap.1 | floatformat:1 }}</td>
+    <td>&nbsp; &nbsp; &nbsp;</td>
+    <td>{{ handicap.2 | floatformat:1 }}</td>
+
+{% endfor %}
+
+</tr>
+
+</table>
+
+<h2>9-Hole Handicap</h2>
+<table style="border: 3px solid black;">
+<tr style="border: 1px solid black;">
+    <th>Round</th>
+    <th> </th>
+    <th>Handicap <br> Differential</th>
+    <th> </th>
+    <th>Handicap</th>
+</tr>
+
+{% for handicap in round_handicap_9 %}
+<tr>
+    <td class='leftround'>{{ handicap.0 }}</td>
+    <td>&nbsp; &nbsp; &nbsp;</td>
+    <td>{{ handicap.1 | floatformat:1 }}</td>
+    <td>&nbsp; &nbsp; &nbsp;</td>
+    <td>{{ handicap.2 | floatformat:1 }}</td>
+
+{% endfor %}
+
+</tr>
+
+</table>
+
+{% endblock %}

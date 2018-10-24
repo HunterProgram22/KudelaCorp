@@ -39,7 +39,7 @@ th, tr {
     <th>GIR</th>
     <th></th>
 </tr>
-{% for round in round_stats %}
+{% for round in round_stats_18 %}
 <tr>
     <form method="POST" action="{% url 'Golf_DeleteRound' %}{{round.id}}">{% csrf_token %}
         <td class='leftround'>{{ round.date }}</td>

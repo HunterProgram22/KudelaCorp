@@ -50,22 +50,62 @@ class Manage(View):
 
 class Rounds9(View):
     def get(self, request):
-        #round_stats9 = Round.objects.filter(holesplayed=9).order_by('-date')
-        context = None
+        round_stats_9 = Round.objects.filter(holesplayed=9).order_by('-date')
+        context = {'round_stats_9':round_stats_9}
         return render(request, 'Golf/Rounds9.html', context)
 
 
 class Rounds18(View):
     def get(self, request):
-        round_stats = Round.objects.filter(holesplayed=18).order_by('-date')
-        context = {'round_stats': round_stats}
+        round_stats_18 = Round.objects.filter(holesplayed=18).order_by('-date')
+        context = {'round_stats_18': round_stats_18}
         return render(request, 'Golf/Rounds18.html', context)
 
 
 class Handicap(View):
     def get(self, request):
-        context = None
+        round_handicap_18 = self.get_round_handicap_18()
+        round_handicap_18.reverse()
+        round_handicap_9 = self.get_round_handicap_9()
+        round_handicap_9.reverse()
+        context = { 'round_handicap_18': round_handicap_18,
+                    'round_handicap_9' : round_handicap_9,
+                    }
         return render(request, 'Golf/Handicap.html', context)
+
+    def get_round_handicap_18(self):
+        round_stats = Round.objects.filter(holesplayed=18).order_by('date')
+        round_handicap = []
+        diffList = []
+        handicapTotal = 0
+        round_count = 0
+        for round in round_stats:
+            round_count += 1
+            diffList.append(round.handicap_diff())
+            #There is probably a more efficient way to do this instead of copying the list each time (yield? enumerate?)
+            diffUsed = diffList[:]
+            if round_count > 20:
+                diffUsed = diffUsed[(round_count-20):round_count]
+            handicapTotal = calcHandicap((round_count), diffUsed)
+            round_handicap.append((round, round.handicap_diff(), handicapTotal))
+        return round_handicap
+
+    def get_round_handicap_9(self):
+        round_stats9 = Round.objects.filter(holesplayed=9).order_by('date')
+        round_handicap9 = []
+        diffList9 = []
+        handicapTotal9 = 0
+        round_count9 = 0
+        for round9 in round_stats9:
+            round_count9 += 1
+            diffList9.append(round9.handicap_diff())
+            #There is probably a more efficient way to do this instead of copying the list each time (yield? enumerate?)
+            diffUsed9 = diffList9[:]
+            if round_count9 > 20:
+                diffUsed9 = diffUsed9[(round_count9-20):round_count]
+            handicapTotal9 = calcHandicap((round_count9), diffUsed9)
+            round_handicap9.append((round9, round9.handicap_diff(), handicapTotal9))
+        return round_handicap9
 
 
 class NewRound(View):
