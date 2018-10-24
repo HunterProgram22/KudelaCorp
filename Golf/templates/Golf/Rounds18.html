@@ -3,3 +3,57 @@
 {% block title %}Golf - 18-Hole Rounds{% endblock %}
 
 {% block pagecontent %}Golf - 18-Hole Rounds{% endblock %}
+
+{% block content %}
+<style>
+
+@media(min-width:768px) {
+#golfsheet {
+    width: 700px;
+}
+}
+
+th, tr {
+    text-align: center;
+}
+
+.leftround {
+    text-align: left;
+    padding-left: 2px;
+}
+
+</style>
+
+
+<h2>18-Hole Rounds Played</h2>
+
+<div id="golfsheet">
+<table width="100%" style="border: 3px solid black;">
+<tr style="border: 1px solid black;">
+    <th>Date</th>
+    <th>Course</th>
+    <th>&nbsp;&nbsp;&nbsp;</th>
+    <th>Strokes</th>
+    <th>Putts</th>
+    <th>Fairways Hit</th>
+    <th>GIR</th>
+    <th></th>
+</tr>
+{% for round in round_stats %}
+<tr>
+    <form method="POST" action="{% url 'Golf_DeleteRound' %}{{round.id}}">{% csrf_token %}
+        <td class='leftround'>{{ round.date }}</td>
+        <td class='leftround'> {{ round.course }}</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>{{round.strokes}}</td>
+        <td>{{round.putts}}</td>
+        <td>{{round.fairways_hit}}</td>
+        <td>{{round.gir}}</td>
+        <td><button type="submit">Delete Round</button><td>
+    </form>
+</tr>
+{% endfor %}
+</table>
+</div>
+
+{% endblock %}

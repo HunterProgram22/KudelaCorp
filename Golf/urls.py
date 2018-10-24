@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import Home, Manage, Rounds9, Rounds18, Handicap, NewRound, NewCourse
+from .views import Home, Manage, Rounds9, Rounds18, Handicap, NewRound, NewCourse, DeleteRound
 from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
@@ -10,4 +10,5 @@ urlpatterns = [
     path('Golf/Handicap/', login_required(Handicap.as_view()), name='Golf_Handicap'),
     path('Golf/NewRound/', login_required(NewRound.as_view()), name='Golf_NewRound'),
     path('Golf/NewCourse/', login_required(NewCourse.as_view()), name='Golf_NewCourse'),
+    path('Golf/DeleteRound/<int:round.id>', login_required(DeleteRound.as_view()), name='Golf_DeleteRound'),
 ]

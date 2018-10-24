@@ -57,8 +57,8 @@ class Rounds9(View):
 
 class Rounds18(View):
     def get(self, request):
-        #round_stats = Round.objects.filter(holesplayed=18).order_by('-date')
-        context = None
+        round_stats = Round.objects.filter(holesplayed=18).order_by('-date')
+        context = {'round_stats': round_stats}
         return render(request, 'Golf/Rounds18.html', context)
 
 
@@ -100,3 +100,18 @@ class NewCourse(View):
         form = CourseForm()
         context = {'form': form}
         return render(request, 'Golf/NewCourse.html', context)
+
+
+class DeleteRound(View):
+    def post(self, request):
+        print('Test')
+        print(request)
+        id = int(request.path.replace("/Golf/Golf/DeleteRound/", ""))
+        #id = 1
+        round = Round.objects.get(pk=id)
+        if round.holesplayed == 18:
+            round.delete()
+            return redirect('Golf_Rounds18')
+        elif round.holesplayed == 9:
+            round.delete()
+            return redirect('Golf_Rounds9')
