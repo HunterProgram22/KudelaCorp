@@ -7,21 +7,38 @@ from .functions import calcHandicap, yearAverages
 
 class Home(View):
     def get(self, request):
-        latest_round_list = Round.objects.order_by('-date')[:5]
-        year_stats = []
-        years_played = []
-        rounds = Round.objects.filter(holesplayed=18).order_by('-date')
-        #rolling_averages = rollingAverages(rounds)
-        for round in rounds:
-            if round.get_year() not in years_played:
-                years_played.append(round.get_year())
-        for year in years_played:
-            year_rounds = Round.objects.filter(date__year=year).filter(holesplayed=18)
-            year_stats.append(yearAverages(year_rounds))
-        context = { 'latest_round_list': latest_round_list,
-                    'year_stats': year_stats
+        year_stats_18 = self.get_year_stats_18()
+        year_stats_9 = self.get_year_stats_9()
+        context = { 'year_stats_18': year_stats_18,
+                    'year_stats_9': year_stats_9
                     }
         return render(request, 'Golf/Home.html', context)
+
+    def get_year_stats_18(self):
+        '''Method for totaling all annual stats for 18-hole rounds.'''
+        year_stats_18 = []
+        years_played_18 = []
+        rounds_18 = Round.objects.filter(holesplayed=18).order_by('-date')
+        for round_18 in rounds_18:
+            if round_18.get_year() not in years_played_18:
+                years_played_18.append(round_18.get_year())
+        for year_18 in years_played_18:
+            year_rounds_18 = Round.objects.filter(date__year=year_18).filter(holesplayed=18)
+            year_stats_18.append(yearAverages(year_rounds_18))
+        return year_stats_18
+
+    def get_year_stats_9(self):
+        '''Method for totaling all annual stats for 9-hole rounds.'''
+        year_stats_9 = []
+        years_played_9 = []
+        rounds_9 = Round.objects.filter(holesplayed=9).order_by('-date')
+        for round_9 in rounds_9:
+            if round_9.get_year() not in years_played_9:
+                years_played_9.append(round_9.get_year())
+        for year_9 in years_played_9:
+            year_rounds_9 = Round.objects.filter(date__year=year_9).filter(holesplayed=9)
+            year_stats_9.append(yearAverages(year_rounds_9))
+        return year_stats_9
 
 
 class Manage(View):
