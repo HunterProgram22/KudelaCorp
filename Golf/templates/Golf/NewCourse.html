@@ -3,3 +3,11 @@
 {% block title %}Golf - New Course{% endblock %}
 
 {% block pagecontent %}Golf - New Course{% endblock %}
+
+{% block content %}
+    <h1>New Course</h1>
+    <form method="POST" class="course-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+{% endblock %}

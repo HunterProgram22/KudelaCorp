@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views import View
 from .models import Round
+from .forms import RoundForm, CourseForm
 from .functions import calcHandicap, yearAverages
 
 
@@ -69,33 +70,33 @@ class Handicap(View):
 
 class NewRound(View):
     def post(self, request):
-        # form = RoundForm(request.POST)
-        # if form.is_valid():
-        #     round = form.save()
-        #     # Add user save at later point here
-        #     round.save()
-        #     return redirect('Golf_Manage')
-        context = None # {'form': form}
+        form = RoundForm(request.POST)
+        if form.is_valid():
+            round = form.save()
+            # Add user save at later point here
+            round.save()
+            return redirect('Golf_Manage')
+        context = {'form': form}
         return render(request, 'Golf/NewRound.html', context)
 
     def get(self, request):
-        # form = RoundForm()
-        context = None #{'form': form}
+        form = RoundForm()
+        context = {'form': form}
         return render(request, 'Golf/NewRound.html', context)
 
 
 class NewCourse(View):
     def post(self, request):
-        # form = CourseForm(request.POST)
-        # if form.is_valid():
-        #     course = form.save()
-        #     # Add user save at later point here
-        #     course.save()
-        #     return redirect('Golf_Manage')
-        context = None # {'form': form}
+        form = CourseForm(request.POST)
+        if form.is_valid():
+            course = form.save()
+            # Add user save at later point here
+            course.save()
+            return redirect('Golf_Manage')
+        context = {'form': form}
         return render(request, 'Golf/NewCourse.html', context)
 
     def get(self, request):
-        # form = CourseForm()
-        context = None #{'form': form}
+        form = CourseForm()
+        context = {'form': form}
         return render(request, 'Golf/NewCourse.html', context)
