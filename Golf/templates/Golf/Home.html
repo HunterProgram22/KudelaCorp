@@ -3,3 +3,90 @@
 {% block title %}Golf Home{% endblock %}
 
 {% block pagecontent %}Golf Home - Dashboard{% endblock %}
+
+{% block content %}
+<style>
+
+td, th {
+    text-align: center;
+
+}
+
+@media(min-width:768px) {
+#golfsheet {
+    width: 700px;
+}
+}
+
+</style>
+
+
+<h1>Home Page</h1>
+
+<div id="golfsheet">
+<h3 align="center">18-Hole Annual Statistics</h3>
+<table width="100%" style="border: 3px solid black;">
+<tr style="border: 1px solid black;">
+    <th>Year</th>
+    <th>Rounds Played</th>
+    <th>Avg. Score</th>
+    <th>Avg. Putts</th>
+    <th>Avg. FH</th>
+    <th>Avg. GIR</th>
+</tr>
+{% for year in year_stats %}
+<tr>
+    <td>{{ year.0 }}</td>
+    <td>{{ year.1 }}</td>
+    <td>{{ year.2 | floatformat:1 }}</td>
+    <td>{{ year.3 | floatformat:1 }}</td>
+    <td>{{ year.4 | floatformat:1 }}</td>
+    <td>{{ year.5 | floatformat:1 }}</td>
+</tr>
+{% endfor %}
+</table>
+
+<h3 align="center">Rolling 18-Hole Averages</h3>
+<table width="100%" style="border: 3px solid black;">
+  <tr style="border: 1px solid black;">
+      <th>Rounds</th>
+      <th>Strokes</th>
+      <th>Putts</th>
+      <th>Fairways Hit</th>
+      <th>GIR</th>
+  </tr>
+  {% for year in rolling_averages %}
+  <tr>
+      <td>Rolling 5<td>
+      <td>{{ year.0 | floatformat:1 }}</td>
+      <td>{{ year.1 | floatformat:1 }}</td>
+      <td>{{ year.2 | floatformat:1 }}</td>
+      <td>{{ year.3 | floatformat:1 }}</td>
+  </tr>
+  {% endfor %}
+  </table>
+
+<h3 align="center">9-Hole Annual Statistics</h3>
+<table width="100%" style="border: 3px solid black;">
+<tr style="border: 1px solid black;">
+    <th>Year</th>
+    <th>Rounds Played</th>
+    <th>Avg. Score</th>
+    <th>Avg. Putts</th>
+    <th>Avg. FH</th>
+    <th>Avg. GIR</th>
+</tr>
+{% for year in year_stats9 %}
+<tr>
+    <td>{{ year.0 }}</td>
+    <td>{{ year.1 }}</td>
+    <td>{{ year.2 | floatformat:1 }}</td>
+    <td>{{ year.3 | floatformat:1 }}</td>
+    <td>{{ year.4 | floatformat:1 }}</td>
+    <td>{{ year.5 | floatformat:1 }}</td>
+</tr>
+{% endfor %}
+</table>
+
+</div>
+{% endblock %}

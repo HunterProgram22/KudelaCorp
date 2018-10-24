@@ -2,12 +2,25 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import View
 from .models import Round
+from .functions import calcHandicap, yearAverages
 
 
 class Home(View):
     def get(self, request):
         latest_round_list = Round.objects.order_by('-date')[:5]
-        context = {'latest_round_list': latest_round_list}
+        year_stats = []
+        years_played = []
+        rounds = Round.objects.filter(holesplayed=18).order_by('-date')
+        #rolling_averages = rollingAverages(rounds)
+        for round in rounds:
+            if round.get_year() not in years_played:
+                years_played.append(round.get_year())
+        for year in years_played:
+            year_rounds = Round.objects.filter(date__year=year).filter(holesplayed=18)
+            year_stats.append(yearAverages(year_rounds))
+        context = { 'latest_round_list': latest_round_list,
+                    'year_stats': year_stats
+                    }
         return render(request, 'Golf/Home.html', context)
 
 
