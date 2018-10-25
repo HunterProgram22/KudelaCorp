@@ -18,7 +18,7 @@ from django.urls import include, path
 from . import views
 
 urlpatterns = [
-    path('', views.home),
+    path('', views.home, name='KudelaCorpHome'),
     path('Golf/', include('Golf.urls')),
     path('Finance/', include('Finance.urls')),
     path('Options/', include('Options.urls')),

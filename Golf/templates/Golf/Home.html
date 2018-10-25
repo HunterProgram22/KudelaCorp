@@ -2,7 +2,6 @@
 
 {% block title %}Golf Home{% endblock %}
 
-{% block pagecontent %}Golf Home - Dashboard{% endblock %}
 
 {% block content %}
 <style>
@@ -21,7 +20,7 @@ td, th {
 </style>
 
 
-<h1>Home Page</h1>
+<h1>{% block pagecontent %}Golf Dashboard{% endblock %}</h1>
 
 <div id="golfsheet">
 <h3 align="center">18-Hole Annual Statistics</h3>
