@@ -45,7 +45,7 @@ class Analysis(View):
     def get(self, request):
         print(request)
         send_data=[(0,0)]
-        context = None #{'send_data': send_data}
+        context = {'send_data': send_data}
         return render(request, 'Finance/Analysis.html', context)
 
     def post(self, request):
@@ -60,9 +60,9 @@ class Analysis(View):
         if category == "":
             return redirect("Finance_Analysis")
         send_data = get_analysis_data(monthly_data, category)
-        context = None #{'send_data': send_data,
-                        #'category': category,
-                        #'year': year}
+        context = { 'send_data': send_data,
+                    'category': category,
+                    'year': year}
         return render(request, 'Finance/Analysis.html', context)
 
 
