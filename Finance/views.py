@@ -9,16 +9,18 @@ class Home(View):
     def get(self, request):
         dash_balance = MonthBal.objects.latest('date')
         dash_income = MonthInc.objects.latest('date')
-        return render(request, 'Finance/home.html', {'dash_balance': dash_balance,
+        return render(request, 'Finance/Home.html', {'dash_balance': dash_balance,
         'dash_income': dash_income})
+
 
 class Manage(View):
     def get(self, request):
-        return render(request, 'Finance/manage.html', {})
+        return render(request, 'Finance/Manage.html', {})
+
 
 class Reports(View):
     def get(self, request):
-        return render(request, 'Finance/reports.html', {})
+        return render(request, 'Finance/Reports.html', {})
 
     def post(self, request):
         this_quarter, this_year, last_quarter, last_quarteryear, \
@@ -30,7 +32,7 @@ class Reports(View):
         yearago_quarter_report = report(this_quarter, yearago)
         ''' _reports are returned as a tuple in the format
         (total_creditcards,total_utilities, total_loans, total_savings)'''
-        return render(request, 'Finance/reports.html',
+        return render(request, 'Finance/Reports.html',
                       {'current_quarter_report': current_quarter_report,
                        'last_quarter_report': last_quarter_report,
                        'yearago_quarter_report': yearago_quarter_report,
@@ -41,8 +43,10 @@ class Reports(View):
 
 class Analysis(View):
     def get(self, request):
+        print(request)
         send_data=[(0,0)]
-        return render(request, 'Finance/analysis.html', {'send_data': send_data})
+        context = None #{'send_data': send_data}
+        return render(request, 'Finance/Analysis.html', context)
 
     def post(self, request):
         year = request.POST.get("year")
@@ -56,10 +60,11 @@ class Analysis(View):
         if category == "":
             return redirect("Finance_Analysis")
         send_data = get_analysis_data(monthly_data, category)
-        return render(request, 'Finance/analysis.html',
-                    {'send_data': send_data,
-                     'category': category,
-                     'year': year})
+        context = None #{'send_data': send_data,
+                        #'category': category,
+                        #'year': year}
+        return render(request, 'Finance/Analysis.html', context)
+
 
 class Balance(View):
     def get(self, request):

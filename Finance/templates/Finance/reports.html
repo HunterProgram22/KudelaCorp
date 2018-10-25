@@ -1,4 +1,4 @@
-{% extends 'Finance/base.html' %}
+{% extends 'Finance/FinanceBase.html' %}
 
 {% load humanize %}
 
@@ -66,7 +66,7 @@ s
 <body>
 <h1>Quarterly Reports</h1>
 <div id="searchform">
-<form action="{% url 'Financereports' %}" method="POST">{% csrf_token %}
+<form action="{% url 'Finance_Reports' %}" method="POST">{% csrf_token %}
 <select name="quarter">
     <option value=''>--Select Quarter--</option>
     <option value='2/2018'>2nd Quarter 2018</option>

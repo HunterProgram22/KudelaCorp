@@ -1,4 +1,6 @@
-{% extends 'Finance/base.html' %}
+{% extends 'Finance/FinanceBase.html' %}
+
+{% block title %}Finance Home{% endblock %}
 
 {% load humanize %}
 
@@ -49,7 +51,7 @@
   </script>
 </head>
 
-<h1>The Kudela Partnership Financial Dashboard</h1>
+<h1>{% block pagecontent %}The Kudela Partnership Financial Dashboard{% endblock %}</h1>
 
     <p>&nbsp;</p>
 

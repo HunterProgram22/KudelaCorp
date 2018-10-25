@@ -1,16 +1,16 @@
-{% extends 'Finance/base.html' %}
+{% extends 'Finance/FinanceBase.html' %}
 
 {% block content %}
 
 <h1>Manage Finances</h1>
 
     <div class="menu-select">
-        <a href="{% url 'balance_new' %}" class="top-menu">
+        <a href="{% url 'Finance_BalanceNew' %}" class="top-menu">
         <span><b> Add Monthly Balance Sheet</b></span></a>
     </div>
 
     <div class="menu-select">
-        <a href="{% url 'income_new' %}" class="top-menu">
+        <a href="{% url 'Finance_IncomeNew' %}" class="top-menu">
         <span><b> Add Monthly Income Statement</b></span></a>
     </div>
 

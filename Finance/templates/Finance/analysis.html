@@ -1,4 +1,4 @@
-{% extends 'Finance/base.html' %}
+{% extends 'Finance/FinanceBase.html' %}
 
 {% load humanize %}
 
@@ -40,7 +40,7 @@
 
 <h1>Data Analysis Central</h1>
 <div id="searchform">
-<form action="{% url 'Financeanalysis' %}" method="POST">{% csrf_token %}
+<form action="{% url 'Finance_Analysis' %}" method="POST">{% csrf_token %}
 <select name="year">
     <option value=''>--Select Year--</option>
     <option value='2018'>2018</option>

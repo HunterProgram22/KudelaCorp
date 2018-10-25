@@ -1,4 +1,4 @@
-{% extends 'Finance/base.html' %}
+{% extends 'Finance/FinanceBase.html' %}
 
 {% load humanize %}
 
@@ -53,7 +53,7 @@ td, th {
 <h1>Income Statement</h1>
 
 <div id="searchform">
-<form action="{% url 'Financeincome' %}" method="POST">{% csrf_token %}
+<form action="{% url 'Finance_Income' %}" method="POST">{% csrf_token %}
 <select name="month">
     <option value=''>--Select Month--</option>
     <option value='1'>January</option>

@@ -1,0 +1,58 @@
+{% extends 'KudelaCorp/AppBase.html' %}
+
+{% block title %}Finance Home{% endblock %}
+
+{% block style %}
+#mainNav.navbar-dark .navbar-collapse .navbar-sidenav {
+  background: #278e07!important;
+}
+
+.bg-dark {
+  background-color: #246f03!important;
+}
+
+#mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item > .nav-link {
+    color: black!important;
+}
+{% endblock %}
+
+
+<!-- Navigation-->
+{% block navbar-brand-link %}{% url 'Finance_Home' %}{% endblock %}
+{% block navbar-brand-title %}Finance{% endblock %}
+
+<!-- Side Menu -->
+{% block navbar-link-one %}{% url 'Finance_Home' %}{% endblock %}
+{% block navbar-link-one-icon %}fa fa-fw fa-dashboard{% endblock %}
+{% block navbar-link-one-label %}Dashboard{% endblock %}
+
+{% block navbar-link-two %}{% url 'Finance_Manage' %}{% endblock %}
+{% block navbar-link-two-icon %}fa fa-fw fa-edit{% endblock %}
+{% block navbar-link-two-label %}Manage{% endblock %}
+
+{% block navbar-link-three %}{% url 'Finance_Analysis' %}{% endblock %}
+{% block navbar-link-three-icon %}fa fa-fw fa-pie-chart{% endblock %}
+{% block navbar-link-three-label %}Analysis{% endblock %}
+
+{% block navbar-link-four %}{% url 'Finance_Reports' %}{% endblock %}
+{% block navbar-link-four-icon %}fa fa-fw fa-file-pdf-o{% endblock %}
+{% block navbar-link-four-label %}Quarterly Reports{% endblock %}
+
+{% block navbar-link-five %}{% url 'Finance_Balance' %}{% endblock %}
+{% block navbar-link-five-icon %}fa fa-fw fa-bar-chart{% endblock %}
+{% block navbar-link-five-label %}Balance Sheet{% endblock %}
+
+{% block navbar-link-six %}{% url 'Finance_Income' %}{% endblock %}
+{% block navbar-link-six-icon %}fa fa-fw fa-line-chart{% endblock %}
+{% block navbar-link-six-label %}Income Statement{% endblock %}
+
+{% block navbar-link-seven %}{% url 'Finance_Cash' %}{% endblock %}
+{% block navbar-link-seven-icon %}fa fa-fw fa-money{% endblock %}
+{% block navbar-link-seven-label %}Cashflow{% endblock %}
+
+
+<!-- /.container-fluid-->
+{% block content %}
+<h1>{% block pagecontent %}Finance Base{% endblock %}</h1>
+{% endblock %}
+<!-- /.content-wrapper-->
