@@ -1,5 +1,5 @@
 from django import forms
-from .models import MonthBal, MonthInc
+from .models import MonthBal, MonthInc, TaxReturn
 
 class MonthBalForm(forms.ModelForm):
 
@@ -11,6 +11,7 @@ class MonthBalForm(forms.ModelForm):
                   'main_home', 'justin_car', 'kat_car', 'capone_credit', 'amex_credit',
                   'discover_credit', 'car_loan', 'pubstudent_loan', 'privstudent_loan',
                   'main_mortgage',)
+
 
 class MonthIncForm(forms.ModelForm):
 
@@ -34,3 +35,13 @@ class MonthIncForm(forms.ModelForm):
                   'amex_creditcard', 'discover_creditcard', 'kohls_vicsec_macy_eddiebauer_creditcards',
                   'katwork_creditcard', 'cashorcheck_purchases', 'daycare',
                   'taxdeductible_giving',)
+
+
+class TaxReturnForm(forms.ModelForm):
+
+    class Meta:
+        model = TaxReturn
+        fields = ('year', 'total_job_wages', 'total_federal_wages', 'total_income',
+                  'adjusted_gross_income', 'itemized_deduction_total', 'federal_taxable_income',
+                  'total_federal_tax_owed', 'total_federal_payments', 'state_taxable_income',
+                  'total_state_tax_owed', 'total_state_payments',)

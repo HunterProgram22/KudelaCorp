@@ -242,13 +242,13 @@ class TaxReturn(models.Model):
     total_state_payments = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
-        return str(self.date) + 'Tax Return'
+        return str(self.year) + 'Tax Return'
 
     def federal_refund_or_payment(self):
         return (self.total_federal_payments - self.total_federal_tax_owed)
 
     def federal_tax_rate(self):
-        return (self.total_federal_tax_owed / self.adjusted_gross_income)
+        return (self.total_federal_tax_owed / self.adjusted_gross_income)*100
 
     def state_refund_or_payment(self):
         return (self.total_state_payments - self.total_state_tax_owed)

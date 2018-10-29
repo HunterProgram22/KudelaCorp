@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .forms import MonthBalForm, MonthIncForm
-from .models import MonthBal, MonthInc
+from .forms import MonthBalForm, MonthIncForm, TaxReturnForm
+from .models import MonthBal, MonthInc, TaxReturn
 from .functions import report, get_report_criteria, get_analysis_data
 
 
@@ -70,7 +70,7 @@ class Balance(View):
     def get(self, request):
         month_balance = MonthBal.objects.order_by('-date')[:2]
         month_balance = month_balance[::-1]
-        return render(request, 'Finance/balancesheet.html', {'month_balance': month_balance})
+        return render(request, 'Finance/Balancesheet.html', {'month_balance': month_balance})
 
     def post(self, request):
         if request.POST.get("month") != '' and request.POST.get("year") != '':
@@ -89,7 +89,7 @@ class Balance(View):
         else:
             month_balance = MonthBal.objects.order_by('-date')[:2]
             month_balance = month_balance[::-1]
-        return render(request, 'Finance/balancesheet.html', {'month_balance': month_balance})
+        return render(request, 'Finance/Balancesheet.html', {'month_balance': month_balance})
 
 class Balance_new(View):
     def post(self, request):
@@ -98,17 +98,17 @@ class Balance_new(View):
             month = form.save(commit=False)
             month.save()
             return redirect('Finance_Manage')
-        return render(request, 'Finance/balance_edit.html', {'form': form})
+        return render(request, 'Finance/BalanceEdit.html', {'form': form})
 
     def get(self, request):
         form = MonthBalForm()
-        return render(request, 'Finance/balance_edit.html', {'form': form})
+        return render(request, 'Finance/BalanceEdit.html', {'form': form})
 
 class Income(View):
     def get(self, request):
         month_income = MonthInc.objects.order_by('-date')[:2]
         month_income = month_income[::-1]
-        return render(request, 'Finance/incomestatement.html', {'month_income': month_income})
+        return render(request, 'Finance/Incomestatement.html', {'month_income': month_income})
 
     def post(self, request):
         if request.POST.get("month") != '' and request.POST.get("year") != '':
@@ -127,7 +127,7 @@ class Income(View):
         else:
             month_income = MonthInc.objects.order_by('-date')[:2]
             month_income = month_income[::-1]
-        return render(request, 'Finance/incomestatement.html', {'month_income': month_income})
+        return render(request, 'Finance/Incomestatement.html', {'month_income': month_income})
 
 class Income_new(View):
     def post(self, request):
@@ -135,17 +135,17 @@ class Income_new(View):
         if form.is_valid():
             form.save()
             return redirect('Finance_Manage')
-        return render(request, 'Finance/income_edit.html', {'form': form})
+        return render(request, 'Finance/IncomeEdit.html', {'form': form})
 
     def get(self, request):
         form = MonthIncForm()
-        return render(request, 'Finance/income_edit.html', {'form': form})
+        return render(request, 'Finance/IncomeEdit.html', {'form': form})
 
 class Cash(View):
     def get(self, request):
         month_cash = MonthInc.objects.all().order_by('-date')[:2]
         month_cash = month_cash[::-1]
-        return render(request, 'Finance/cashflow.html', {'month_cash': month_cash})
+        return render(request, 'Finance/Cashflow.html', {'month_cash': month_cash})
 
     def post(self, request):
         if request.POST.get("month") != '' and request.POST.get("year") != '':
@@ -164,4 +164,25 @@ class Cash(View):
         else:
             month_cash = MonthInc.objects.order_by('-date')[:2]
             month_cash = month_cash[::-1]
-        return render(request, 'Finance/cashflow.html', {'month_cash': month_cash})
+        return render(request, 'Finance/Cashflow.html', {'month_cash': month_cash})
+
+
+class Tax_new(View):
+    def post(self, request):
+        form = TaxReturnForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('Finance_Manage')
+        return render(request, 'Finance/TaxEdit.html', {'form': form})
+
+    def get(self, request):
+        form = TaxReturnForm()
+        return render(request, 'Finance/TaxEdit.html', {'form': form})
+
+
+class Taxes(View):
+    def get(self, request):
+        tax_returns = TaxReturn.objects.order_by('-year')
+        tax_returns = tax_returns[::-1]
+        context = {'tax_returns': tax_returns}
+        return render(request, 'Finance/Taxreturns.html', context)

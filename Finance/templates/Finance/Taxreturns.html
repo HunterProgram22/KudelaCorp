@@ -1,0 +1,103 @@
+{% extends 'Finance/FinanceBase.html' %}
+
+{% block content %}
+{% load humanize %}
+
+<style>
+td, th {
+  padding-right: 2px;
+  padding-left: 2px;
+}
+
+.blank_row {
+    height: 10px;
+}
+
+#content {
+  float: left;
+  width: 100px;
+  background-color: #fff;
+  text-align: right;
+  margin-right: 15px;
+}
+#accountnames {
+  float: left;
+  width: 225px;
+  background-color: #fff;
+}
+#cleared {
+  clear: both;
+}
+
+#dollar, #plus, #minus {
+    float: left;
+}
+#instructions {
+    font-size: 11px;
+    margin: 2px;
+    width: 315px;
+}
+</style>
+<h1>Tax Returns</h1>
+
+    <div id="accountnames">
+        <table width="100%" style="border: 2px solid black;">
+            <tr style="border: 1px solid black;"><th>Date</th></tr>
+            <tr><th>Total Job Wages</th></tr>
+            <tr><th>Total Federal Wages</th></tr>
+            <tr class="blank_row"><td></td></tr
+            <tr><th>Total Income</th></tr>
+            <tr><th>Adjusted Gross Income (AGI)</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><th>Total Deductions</th></tr>
+            <tr><th>Federal Taxable Income</th></tr>
+            <tr><th>Federal Tax Owed</th></tr>
+            <tr><th>Federal Tax Payments</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><th>Federal Refund/Payment</th></tr>
+            <tr><th>Effective Federal Tax Rate</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><th>State Taxable Income</th></tr>
+            <tr><th>Total State Tax Owed</th></tr>
+            <tr><th>State Tax Payments</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><th>State Refund/Payment</th></tr>
+            <tr><th>Effective State Tax Rate</th></tr>
+        </table>
+    </div>
+
+    {% for field in tax_returns %}
+    <div id="content">
+        <table width="100%" style="border: 2px solid black; padding: 2px;">
+
+            <tr style="text-align: center; border: 1px solid black;"><td>
+            <b>{{ field.year | date:"Y" }}</b>
+            </td></tr>
+            <tr><td>{{ field.total_job_wages | intcomma }}</td></tr>
+            <tr><td>{{ field.total_federal_wages| intcomma }}</td></tr>
+            <tr class="blank_row"><td></td></tr
+            <tr><td>{{ field.total_income | intcomma }}</td></tr>
+            <tr><td>{{ field.adjusted_gross_income | intcomma }}</td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><td>{{ field.itemized_deduction_total | intcomma }}</td></tr>
+            <tr><td>{{ field.federal_taxable_income | intcomma }}</td></tr>
+            <tr><td>{{ field.total_federal_tax_owed| intcomma }}</td></tr>
+            <tr><td>{{ field.total_federal_payments | intcomma }}</td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="totalrow"><td><b><span id="dollar">$</span>{{ field.federal_refund_or_payment | intcomma }}</b></td></tr>
+            <tr class="totalrow"><td>{{ field.federal_tax_rate | floatformat:2 }}<span id="percent">%</span></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><td>{{ field.state_taxable_income | intcomma }}</td></tr>
+            <tr><td>{{ field.total_state_tax_owed| intcomma }}</td></tr>
+            <tr><td>{{ field.total_state_payments | intcomma }}</td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="totalrow"><td><b><span id="dollar">$</span>{{ field.state_refund_or_payment | intcomma }}</b></td></tr>
+            <tr class="totalrow"><td>{{ field.state_tax_rate | floatformat:2 }}<span id="percent">%</span></td></tr>
+
+
+        </table>
+    </div>
+    {% endfor %}
+{% endblock %}
