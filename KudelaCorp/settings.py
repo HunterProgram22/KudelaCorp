@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'Golf.apps.GolfConfig',
     'Finance.apps.FinanceConfig',
     'Options.apps.OptionsConfig',
+    'Photos.apps.PhotosConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
