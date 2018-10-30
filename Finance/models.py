@@ -254,4 +254,4 @@ class TaxReturn(models.Model):
         return (self.total_state_payments - self.total_state_tax_owed)
 
     def state_tax_rate(self):
-        return (self.total_state_tax_owed / self.state_taxable_income)
+        return (self.total_state_tax_owed / self.state_taxable_income)*100

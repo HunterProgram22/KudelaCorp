@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'Finance.apps.FinanceConfig',
     'Options.apps.OptionsConfig',
     'Photos.apps.PhotosConfig',
+    'Reports.apps.ReportsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
