@@ -13,6 +13,17 @@ class Manage(View):
     def get(self, request):
         return render(request, 'Options/Manage.html', {})
 
+
 class Options_new(View):
     def get(self, request):
-        return render(request, 'Options/OptionNew.html', {})
+        return render(request, 'Options/OptionsNew.html', {})
+
+
+class Options_open(View):
+    def get(self, request):
+        return render(request, 'Options/OptionsOpen.html', {})
+
+
+class Options_closed(View):
+    def get(self, request):
+        return render(request, 'Options/OptionsClosed.html', {})

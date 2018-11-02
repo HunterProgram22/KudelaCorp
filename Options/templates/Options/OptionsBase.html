@@ -4,11 +4,11 @@
 
 {% block style %}
 #mainNav.navbar-dark .navbar-collapse .navbar-sidenav {
-  background: #6f2403!important;
+  background: #7a7b7f!important;
 }
 
 .bg-dark {
-  background-color: #6f2403!important;
+  background-color: #041ec1!important;
 }
 
 #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item > .nav-link {
@@ -30,17 +30,17 @@
 {% block navbar-link-two-icon %}fa fa-fw fa-edit{% endblock %}
 {% block navbar-link-two-label %}Manage{% endblock %}
 
-{% block navbar-link-three %}{% url 'Finance_Analysis' %}{% endblock %}
-{% block navbar-link-three-icon %}fa fa-fw fa-pie-chart{% endblock %}
-{% block navbar-link-three-label %}Analysis{% endblock %}
+{% block navbar-link-three %}{% url 'Options_OptionsOpen' %}{% endblock %}
+{% block navbar-link-three-icon %}fa fa-fw fa-plus-circle{% endblock %}
+{% block navbar-link-three-label %}Open Options Positions{% endblock %}
 
-{% block navbar-link-four %}{% url 'Finance_Reports' %}{% endblock %}
-{% block navbar-link-four-icon %}fa fa-fw fa-file-pdf-o{% endblock %}
-{% block navbar-link-four-label %}Quarterly Reports{% endblock %}
+{% block navbar-link-four %}{% url 'Options_OptionsClosed' %}{% endblock %}
+{% block navbar-link-four-icon %}fa fa-fw fa-minus-circle{% endblock %}
+{% block navbar-link-four-label %}Closed Positions{% endblock %}
 
-{% block navbar-link-five %}{% url 'Finance_Balance' %}{% endblock %}
-{% block navbar-link-five-icon %}fa fa-fw fa-bar-chart{% endblock %}
-{% block navbar-link-five-label %}Balance Sheet{% endblock %}
+{% block navbar-link-five %}{% endblock %}
+{% block navbar-link-five-icon %}{% endblock %}
+{% block navbar-link-five-label %}{% endblock %}
 
 {% block navbar-link-six %}{% endblock %}
 {% block navbar-link-six-icon %}{% endblock %}
