@@ -45,18 +45,39 @@ class OptionPosition(models.Model):
     QUICK_TRADE = "Quick Trade"
     FLAT_TRADE = "Flat Trade"
     EARNINGS_PLAY = "Earnings Play"
-    OPTIONS_STRATEGY = {
+    OPTIONS_STRATEGY = (
         (SELL_PREMIUM, "Sell Premium"),
         (TREND_TRADE, "Trend Trade"),
         (SPEC_TRADE, "Spec Trade"),
         (QUICK_TRADE, "Quick Trade"),
         (FLAT_TRADE, "Flat Trade"),
         (EARNINGS_PLAY, "Earnings Play"),
-    }
+    )
+
+    ROBINHOOD = "Robinhood"
+    TASTYWORKS = "Tastyworks"
+    ACCOUNTS = (
+        (ROBINHOOD, "Robinhood"),
+        (TASTYWORKS, "Tastyworks"),
+    )
+
+    OPEN = "Open"
+    CLOSED = "Closed"
+    POSITION_STATUS = (
+        (OPEN, "Open"),
+        (CLOSED, "Closed"),
+    )
 
     stock = models.CharField(max_length=10)
+    account = models.CharField(max_length=30,
+        choices=ACCOUNTS,
+        default=ROBINHOOD )
+    position_status = models.CharField(max_length=10,
+        choices=POSITION_STATUS,
+        default=OPEN)
     position_open_date = models.DateField()
     position_expiration_date = models.DateField()
+    position_close_date = models.DateField()
     option_play = models.CharField(max_length=50,
         choices=OPTIONS_PLAYBOOK,
         default=NAKED_CALL  )
@@ -78,5 +99,8 @@ class OptionPosition(models.Model):
 
 
 
-    def days_to_expiratin(self):
+    def days_to_expiration(self):
         return self.position_expiration_date - time.today()
+
+    def profit_or_loss(self):
+        return self.cost_to_exit_trade - self.cost_to_enter_trade - (self.fees_to_enter_trade + self.fees_to_exit_trade)
