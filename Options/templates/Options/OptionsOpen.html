@@ -54,30 +54,100 @@ td, th {
 </style>
 <h1>Open Positions</h1>
 
-  <h3>Bullish Positions</h3>
-
-  <div id="accountnames">
-      <table width="100%" style="border: 2px solid black;">
+<div>
+  <table class="majortable">
+    <tr class="majortablerow">
+      <th><h3>Bullish Positions</h3></th>
+    </tr>
+    <tr class="majortablerow">
+      <th>
+        <table width="100%" style="border: 2px solid black;">
           <tr style="border: 1px solid black;"><th>Stock</th></tr>
           <tr class="detail"><th>Account</th></tr>
           <tr class="detail"><th>Max Profit</th></tr>
           <tr><th>Cost to Enter Trade</th></tr>
-      </table>
-  </div>
-
-    {% for field in open_options %}
-    <div id="content">
-        <table width="100%" style="border: 2px solid black;">
-
-            <tr style="text-align: center; border: 1px solid black;"><td>
-            <b>{{ field.stock }}</b>
-            </td></tr>
-            <tr class="detail"><td>{{ field.account }}</td></tr>
-            <tr class="detail"><td><u>{{ field.max_profit | intcomma }}</u></td></tr>
-            <tr><td><b><span id="dollar">$</span>{{ field.cost_to_enter_trade | intcomma }}</b></td></tr>
-
         </table>
-    </div>
+      </th>
+
+
+        {% for field in open_options %}
+        <td class="majortable">
+        <div id="content">
+            <table width="100%" style="border: 2px solid black;">
+
+                <tr style="text-align: center; border: 1px solid black;"><td>
+                <b>{{ field.stock }}</b>
+                </td></tr>
+                <tr class="detail"><td>{{ field.account }}</td></tr>
+                <tr class="detail"><td><u>{{ field.max_profit | intcomma }}</u></td></tr>
+                <tr><td><b><span id="dollar">$</span>{{ field.cost_to_enter_trade | intcomma }}</b></td></tr>
+
+              </table>
+        </div>
+        </td>
+        {% endfor %}
+    </tr>
+    <tr class="majortablerow">
+      <th><h3>Neutral Positions</h3></th>
+    </tr>
+
+    <tr class="majortablerow">
+      <th>
+        <table width="100%" style="border: 2px solid black;">
+          <tr style="border: 1px solid black;"><th>Stock</th></tr>
+          <tr class="detail"><th>Account</th></tr>
+          <tr class="detail"><th>Max Profit</th></tr>
+          <tr><th>Cost to Enter Trade</th></tr>
+        </table>
+      </th>
+
+
+      {% for field in open_options %}
+      <td class="majortable">
+        <div id="content">
+            <table width="100%" style="border: 2px solid black;">
+                <tr style="text-align: center; border: 1px solid black;"><td>
+                <b>{{ field.stock }}</b>
+                </td></tr>
+                <tr class="detail"><td>{{ field.account }}</td></tr>
+                <tr class="detail"><td><u>{{ field.max_profit | intcomma }}</u></td></tr>
+                <tr><td><b><span id="dollar">$</span>{{ field.cost_to_enter_trade | intcomma }}</b></td></tr>
+            </table>
+          </td>
+        {% endfor %}
+    </tr>
+
+    <tr class="majortablerow">
+      <th><h3>Bearish Positions</h3><th>
+    </tr>
+    <tr class="majortablerow">
+      <td class="majortable">
+                  <table width="100%" style="border: 2px solid black;">
+                      <tr style="border: 1px solid black;"><th>Stock</th></tr>
+                      <tr class="detail"><th>Account</th></tr>
+                      <tr class="detail"><th>Max Profit</th></tr>
+                      <tr><th>Cost to Enter Trade</th></tr>
+                  </table>
+      </td>
+                {% for field in open_options %}
+                <td class="majortable">
+                <div id="content">
+                    <table width="100%" style="border: 2px solid black;">
+
+                        <tr style="text-align: center; border: 1px solid black;"><td>
+                        <b>{{ field.stock }}</b>
+                        </td></tr>
+                        <tr class="detail"><td>{{ field.account }}</td></tr>
+                        <tr class="detail"><td><u>{{ field.max_profit | intcomma }}</u></td></tr>
+                        <tr><td><b><span id="dollar">$</span>{{ field.cost_to_enter_trade | intcomma }}</b></td></tr>
+
+                        </table>
+                </td>
+                {% endfor %}
+
+    </tr>
+  </table>
+</div>
 
    <script>
     function myFunction() {
@@ -92,5 +162,5 @@ td, th {
     }
     }
     </script>
-    {% endfor %}
+
 {% endblock %}
