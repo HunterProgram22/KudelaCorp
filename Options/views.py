@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import View
+from .forms import OptionPositionForm
 
 
 class Home(View):
@@ -16,7 +17,8 @@ class Manage(View):
 
 class Options_new(View):
     def get(self, request):
-        return render(request, 'Options/OptionsNew.html', {})
+        form = OptionPositionForm
+        return render(request, 'Options/OptionsNew.html', {'form':form})
 
 
 class Options_open(View):
