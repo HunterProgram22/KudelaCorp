@@ -1,0 +1,96 @@
+{% extends 'Options/OptionsBase.html' %}
+
+{% load humanize %}
+
+{% block content %}
+<style>
+button, input {
+    padding: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+form {
+    padding: 2px;
+    border: 2px gray solid;
+    width: 315px;
+}
+
+td, th {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.blank_row {
+    height: 10px;
+}
+
+#content {
+  float: left;
+  width: 100px;
+  background-color: #fff;
+  text-align: right;
+  margin-right: 15px;
+}
+#accountnames {
+  float: left;
+  width: 225px;
+  margin-right: -10px;
+  background-color: #fff;
+}
+#cleared {
+  clear: both;
+}
+
+#dollar {
+    float: left;
+}
+
+#instructions {
+    font-size: 11px;
+    margin: 2px;
+    width: 315px;
+}
+</style>
+<h1>Open Positions</h1>
+
+  <h3>Bullish Positions</h3>
+
+  <div id="accountnames">
+      <table width="100%" style="border: 2px solid black;">
+          <tr style="border: 1px solid black;"><th>Stock</th></tr>
+          <tr class="detail"><th>Account</th></tr>
+          <tr class="detail"><th>Max Profit</th></tr>
+          <tr><th>Cost to Enter Trade</th></tr>
+      </table>
+  </div>
+
+    {% for field in open_options %}
+    <div id="content">
+        <table width="100%" style="border: 2px solid black;">
+
+            <tr style="text-align: center; border: 1px solid black;"><td>
+            <b>{{ field.stock }}</b>
+            </td></tr>
+            <tr class="detail"><td>{{ field.account }}</td></tr>
+            <tr class="detail"><td><u>{{ field.max_profit | intcomma }}</u></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.cost_to_enter_trade | intcomma }}</b></td></tr>
+
+        </table>
+    </div>
+
+   <script>
+    function myFunction() {
+    var x = document.getElementsByClassName('detail');
+    var i;
+    for (i = 0; i < x.length; i++){
+        if (x[i].style.display === 'none') {
+            x[i].style.display = 'table-row';
+        } else {
+            x[i].style.display = 'none';
+        }
+    }
+    }
+    </script>
+    {% endfor %}
+{% endblock %}
