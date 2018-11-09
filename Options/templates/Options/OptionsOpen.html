@@ -64,8 +64,9 @@ td, th {
         <table width="100%" style="border: 2px solid black;">
           <tr style="border: 1px solid black;"><th>Stock</th></tr>
           <tr class="detail"><th>Account</th></tr>
-          <tr class="detail"><th>Max Profit</th></tr>
-          <tr><th>Cost to Enter Trade</th></tr>
+          <tr class="detail"><th>Expiration Date</th></tr>
+          <tr class="detail"><th>Days to Expiration</th></tr>
+          <tr class="detail"><th>Strike Prices</th></tr>
         </table>
       </th>
 
@@ -79,8 +80,9 @@ td, th {
                 <b>{{ field.stock }}</b>
                 </td></tr>
                 <tr class="detail"><td>{{ field.account }}</td></tr>
-                <tr class="detail"><td><u>{{ field.max_profit | intcomma }}</u></td></tr>
-                <tr><td><b><span id="dollar">$</span>{{ field.cost_to_enter_trade | intcomma }}</b></td></tr>
+                <tr class="detail"><td>{{ field.position_expiration_date }}</td></tr>
+                <tr class="detail"><td>{{ field.days_to_expiration }}</td></tr>
+                <tr class="detail"><td>{{ field.strike_prices }}</td></tr>
 
               </table>
         </div>

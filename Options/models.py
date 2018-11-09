@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import date
 
 class OptionPosition(models.Model):
     NAKED_CALL = "Naked Call"
@@ -100,7 +101,8 @@ class OptionPosition(models.Model):
 
 
     def days_to_expiration(self):
-        return self.position_expiration_date - time.today()
+        days = self.position_expiration_date - date.today()
+        return days.days
 
     def profit_or_loss(self):
         return self.cost_to_exit_trade - self.cost_to_enter_trade - (self.fees_to_enter_trade + self.fees_to_exit_trade)
