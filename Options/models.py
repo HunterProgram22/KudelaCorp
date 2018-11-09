@@ -77,7 +77,7 @@ class OptionPosition(models.Model):
         default=OPEN)
     position_open_date = models.DateField()
     position_expiration_date = models.DateField()
-    position_close_date = models.DateField()
+    position_close_date = models.DateField(null=True, blank=True)
     option_play = models.CharField(max_length=50,
         choices=OPTIONS_PLAYBOOK,
         default=NAKED_CALL  )
@@ -94,8 +94,8 @@ class OptionPosition(models.Model):
     buying_power_reduction = models.DecimalField(max_digits=8, decimal_places=2)
     cost_to_enter_trade = models.DecimalField(max_digits=8, decimal_places=2)
     fees_to_enter_trade = models.DecimalField(max_digits=8, decimal_places=2)
-    cost_to_exit_trade = models.DecimalField(max_digits=8, decimal_places=2)
-    fees_to_exit_trade = models.DecimalField(max_digits=8, decimal_places=2)
+    cost_to_exit_trade = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
+    fees_to_exit_trade = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
 
 
 

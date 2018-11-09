@@ -23,7 +23,7 @@ class Options_new(View):
             month = form.save(commit=False)
             month.save()
             return redirect('Options_Manage')
-        return render(request, 'Options/Manage.html', {'form': form})
+        return render(request, 'Options/Manage.html', {'form':form})
 
     def get(self, request):
         form = OptionPositionForm
@@ -33,7 +33,15 @@ class Options_new(View):
 class Options_open(View):
     def get(self, request):
         open_options = OptionPosition.objects.filter(position_status='Open')
-        return render(request, 'Options/OptionsOpen.html', {'open_options':open_options})
+        bullish_options = open_options.filter(directional_bias='Bullish')
+        neutral_options = open_options.filter(directional_bias='Neutral')
+        bearish_options = open_options.filter(directional_bias='Bearish')
+        return render(request, 'Options/OptionsOpen.html', {
+            'open_options':open_options,
+            'bullish_options':bullish_options,
+            'neutral_options':neutral_options,
+            'bearish_options':bearish_options,
+            })
 
 
 class Options_closed(View):
