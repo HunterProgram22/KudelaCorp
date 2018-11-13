@@ -1,0 +1,107 @@
+{% extends 'Options/OptionsBase.html' %}
+
+{% load humanize %}
+
+
+{% block content %}
+<style>
+button, input {
+    padding: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+form {
+    padding: 2px;
+    border: 2px gray solid;
+    width: 315px;
+}
+
+td, th {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.blank_row {
+    height: 10px;
+}
+
+#content {
+  float: left;
+  width: 100px;
+  background-color: #fff;
+  text-align: right;
+  margin-right: 15px;
+}
+#accountnames {
+  float: left;
+  width: 225px;
+  margin-right: -10px;
+  background-color: #fff;
+}
+#cleared {
+  clear: both;
+}
+
+#dollar {
+    float: left;
+}
+
+#instructions {
+    font-size: 11px;
+    margin: 2px;
+    width: 315px;
+}
+</style>
+<h1>Closed Positions</h1>
+
+<div>
+  <table id="table_id" class="display">
+      <thead>
+          <tr>
+              <th>Stock</th>
+              <th>Directional Bias</th>
+              <th>Strategy</th>
+              <th>Profit/Loss</th>
+          </tr>
+      </thead>
+
+
+      <tbody>
+          <tr>
+              <td>{{ field.stock }}</td>
+              <td>{{ field.directional_bias }}</td>
+              <td>{{ field.strategy }}</td>
+              <td>{{ field.profit_or_loss }}</td>
+          </tr>
+      </tbody>
+
+  </table>
+
+</div>
+
+   <script>
+
+     var dataSet = [
+      {% for field in closed_options %}
+      ["{{field.stock}}", "{{field.directional_bias}}", "{{field.strategy}}", "{{field.profit_or_loss}}"],
+      {% endfor %}
+    ];
+
+     $(document).ready( function () {
+     $('#table_id').DataTable( {
+       data: dataSet,
+       columns: [
+        { title: "Stock" },
+        { title: "Directional Bias" },
+        { title: "Strategy" },
+        { title: "Profit/Loss" }
+       ]
+     }
+
+     );
+ } );
+
+    </script>
+
+{% endblock %}
