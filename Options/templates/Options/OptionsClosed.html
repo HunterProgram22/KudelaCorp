@@ -56,12 +56,14 @@ td, th {
 <h1>Closed Positions</h1>
 
 <div>
-  <table id="table_id" class="display">
+  <table id="option_table" class="display">
       <thead>
           <tr>
               <th>Stock</th>
               <th>Directional Bias</th>
               <th>Strategy</th>
+              <th>Option Play</th>
+              <th>Probability of Profit</th>    
               <th>Profit/Loss</th>
           </tr>
       </thead>
@@ -72,6 +74,8 @@ td, th {
               <td>{{ field.stock }}</td>
               <td>{{ field.directional_bias }}</td>
               <td>{{ field.strategy }}</td>
+              <td>{{ field.option_play }}</td>
+              <td>{{ field.probability_of_profit }}</td>
               <td>{{ field.profit_or_loss }}</td>
           </tr>
       </tbody>
@@ -84,17 +88,22 @@ td, th {
 
      var dataSet = [
       {% for field in closed_options %}
-      ["{{field.stock}}", "{{field.directional_bias}}", "{{field.strategy}}", "{{field.profit_or_loss}}"],
+      ["{{field.stock}}", "{{field.directional_bias}}",
+      "{{field.strategy}}", "{{field.option_play}}",
+      "{{field.probability_of_profit}}","{{field.profit_or_loss}}",
+      ],
       {% endfor %}
     ];
 
      $(document).ready( function () {
-     $('#table_id').DataTable( {
+     $('#option_table').DataTable( {
        data: dataSet,
        columns: [
         { title: "Stock" },
         { title: "Directional Bias" },
         { title: "Strategy" },
+        { title: "Option Play" },
+        { title: "Probability of Profit" },
         { title: "Profit/Loss" }
        ]
      }
