@@ -70,6 +70,7 @@ td, th {
           <tr class="detail"><th>Probability of Profit</th></tr>
           <tr class="detail"><th>Max Profit</th></tr>
           <tr class="detail"><th>Max Loss</th></tr>
+          <tr class="detail"><th>Expected Value</th></tr>
         </table>
       </th>
 
@@ -88,6 +89,8 @@ td, th {
                 <tr class="detail"><td>{{ field.probability_of_profit | floatformat:1 }}<span>%</span></td></tr>
                 <tr class="detail"><td><span>$</span>{{ field.max_profit }}</td></tr>
                 <tr class="detail"><td><span>$</span>{{ field.max_loss }}</td></tr>
+                <tr class="detail"><td>{{ field.expected_value | floatformat:1 }}</td></tr>
+
               </table>
         </div>
         </td>
@@ -108,6 +111,7 @@ td, th {
           <tr class="detail"><th>Probability of Profit</th></tr>
           <tr class="detail"><th>Max Profit</th></tr>
           <tr class="detail"><th>Max Loss</th></tr>
+          <tr class="detail"><th>Expected Value</th></tr>
         </table>
       </th>
 
@@ -126,6 +130,7 @@ td, th {
               <tr class="detail"><td>{{ field.probability_of_profit | floatformat:1 }}<span>%</span></td></tr>
               <tr class="detail"><td><span>$</span>{{ field.max_profit }}</td></tr>
               <tr class="detail"><td><span>$</span>{{ field.max_loss }}</td></tr>
+              <tr class="detail"><td>{{ field.expected_value | floatformat:1 }}</td></tr>
             </table>
           </td>
         {% endfor %}
@@ -145,6 +150,7 @@ td, th {
           <tr class="detail"><th>Probability of Profit</th></tr>
           <tr class="detail"><th>Max Profit</th></tr>
           <tr class="detail"><th>Max Loss</th></tr>
+          <tr class="detail"><th>Expected Value</th></tr>
         </table>
       </td>
                 {% for field in bearish_options %}
@@ -161,6 +167,7 @@ td, th {
                       <tr class="detail"><td>{{ field.probability_of_profit | floatformat:1 }}<span>%</span></td></tr>
                       <tr class="detail"><td><span>$</span>{{ field.max_profit }}</td></tr>
                       <tr class="detail"><td><span>$</span>{{ field.max_loss }}</td></tr>
+                      <tr class="detail"><td>{{ field.expected_value | floatformat:1 }}</td></tr>
                     </table>
                 </td>
                 {% endfor %}

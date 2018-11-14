@@ -98,7 +98,8 @@ class OptionPosition(models.Model):
     cost_to_exit_trade = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
     fees_to_exit_trade = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
 
-
+    def __str__(self):
+        return str(self.stock) + " " + str(self.position_expiration_date)
 
     def days_to_expiration(self):
         days = self.position_expiration_date - date.today()
@@ -106,3 +107,7 @@ class OptionPosition(models.Model):
 
     def profit_or_loss(self):
         return self.cost_to_exit_trade - self.cost_to_enter_trade - (self.fees_to_enter_trade + self.fees_to_exit_trade)
+
+    def expected_value(self):
+        ev = ((self.probability_of_profit * self.max_profit) - ((100-self.probability_of_profit)*self.max_loss))/100
+        return ev
