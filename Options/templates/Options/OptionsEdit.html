@@ -1,0 +1,87 @@
+{% extends 'Options/OptionsBase.html' %}
+
+{% load humanize %}
+
+{% block content %}
+<style>
+button, input {
+    padding: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+form {
+    padding: 2px;
+    border: 2px gray solid;
+    width: 315px;
+}
+
+td, th {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.blank_row {
+    height: 10px;
+}
+
+#content {
+  float: left;
+  width: 100px;
+  background-color: #fff;
+  text-align: right;
+  margin-right: 15px;
+}
+#accountnames {
+  float: left;
+  width: 225px;
+  margin-right: -10px;
+  background-color: #fff;
+}
+#cleared {
+  clear: both;
+}
+
+#dollar {
+    float: left;
+}
+
+#instructions {
+    font-size: 11px;
+    margin: 2px;
+    width: 315px;
+}
+</style>
+
+<div>
+  <table class="majortable">
+    <tr class="majortablerow">
+      <th><h3>Open Positions</h3></th>
+    </tr>
+    <tr class="majortablerow">
+      <th>
+        <table width="100%" style="border: 2px solid black;">
+          <tr style="border: 1px solid black;"><th>Stock</th></tr>
+          <tr class="detail"><th>Account</th></tr>
+          <tr class="detail"><th>Expiration Date</th></tr>
+          <tr class="detail"><th>Days to Expiration</th></tr>
+        </table>
+      </th>
+
+      {% for field in open_options %}
+      <td class="majortable">
+      <div id="content">
+          <table width="100%" style="border: 2px solid black;">
+              <tr style="text-align: center; border: 1px solid black;"><td>
+              <b>{{ field.stock }}</b>
+              </td></tr>
+              <tr class="detail"><td>{{ field.account }}</td></tr>
+              <tr class="detail"><td>{{ field.position_expiration_date | date:"M d Y" }}</td></tr>
+              <tr class="detail"><td>{{ field.days_to_expiration }}</td></tr>
+              <tr class="detail"><td><a href="#">Edit</a></td></tr>
+            </table>
+      </div>
+      </td>
+      {% endfor %}
+
+{% endblock %}

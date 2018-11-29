@@ -48,3 +48,10 @@ class Options_closed(View):
     def get(self, request):
         closed_options = OptionPosition.objects.filter(position_status='Closed')
         return render(request, 'Options/OptionsClosed.html', {'closed_options':closed_options})
+
+class Options_edit(View):
+    def get(self, request):
+        open_options = OptionPosition.objects.filter(position_status='Open')
+        return render(request, 'Options/OptionsEdit.html', {
+            'open_options':open_options,
+            })
