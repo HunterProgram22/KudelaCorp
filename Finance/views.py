@@ -104,6 +104,13 @@ class Balance_new(View):
         form = MonthBalForm()
         return render(request, 'Finance/BalanceEdit.html', {'form': form})
 
+
+class Annual_income(View):
+    def get(self, request):
+        ...
+        return render(request, 'Finance/AnnualIncome.html', {})
+
+
 class Income(View):
     def get(self, request):
         month_income = MonthInc.objects.order_by('-date')[:2]

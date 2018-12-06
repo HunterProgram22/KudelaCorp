@@ -25,7 +25,7 @@ SECRET_KEY = '1=)v6iz1n)w2@r(oko-r6%pzqp_o)*knpi5+c8q#5%-cu9=l&v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['justinkudela.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'justinkudela.pythonanywhere.com']
 
 
 # Application definition
@@ -82,18 +82,18 @@ WSGI_APPLICATION = 'KudelaCorp.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
-    #'default': {
-    #    'ENGINE': 'django.db.backends.sqlite3',
-    #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    # }
     'default': {
-       'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'JustinKudela$KudelaCorp',
-        'USER': 'JustinKudela',
-        'PASSWORD': 'wakeforest22',
-        'HOST': 'JustinKudela.mysql.pythonanywhere-services.com',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
+       'ENGINE': 'django.db.backends.sqlite3',
+       'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+    # 'default': {
+    #    'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'JustinKudela$KudelaCorp',
+    #     'USER': 'JustinKudela',
+    #     'PASSWORD': 'wakeforest22',
+    #     'HOST': 'JustinKudela.mysql.pythonanywhere-services.com',   # Or an IP Address that your DB is hosted on
+    #     'PORT': '3306',
+    # }
 }
 
 

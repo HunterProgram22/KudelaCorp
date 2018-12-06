@@ -9,7 +9,6 @@ def report(quarter, year):
     networth, loanbalance, savingsbalance = get_quarter_balance(qmonthbal, qyearbal)
     return (creditcards, utilities, loans, savings, surplus, networth, loanbalance, savingsbalance)
 
-
 def get_report_criteria(request):
     quarter = request.POST.get("quarter")[0]
     year = request.POST.get("quarter")[2:]

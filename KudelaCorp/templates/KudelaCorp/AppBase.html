@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>{% block title %}AppBase{% endblock %}</title>
+
+  {% load static %}
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+
+  <!-- Bootstrap core CSS-->
+  <link href="{% static '/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="{% static '/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+  <!-- Custom styles for this template-->
+  <link href="{% static '/css/sb-admin.css' %}" rel="stylesheet">
+
+  <style>
+    {% block style %}{% endblock %}
+  </style>
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="{% block navbar-brand-link %}index.html{% endblock %}">{% block navbar-brand-title %}NavBar{% endblock %}</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="{% block navbar-link-one %}index.html{% endblock %}">
+            <i class="{% block navbar-link-one-icon %}fa fa-fw fa-dashboard{% endblock %}"></i>
+            <span class="nav-link-text">{% block navbar-link-one-label %}Dashboard{% endblock %}</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+          <a class="nav-link" href="{% block navbar-link-two %}charts.html{% endblock %}">
+            <i class="{% block navbar-link-two-icon %}fa fa-fw fa-area-chart{% endblock %}"></i>
+            <span class="nav-link-text">{% block navbar-link-two-label %}Charts{% endblock %}</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+          <a class="nav-link" href="{% block navbar-link-three %}tables.html{% endblock %}">
+            <i class="{% block navbar-link-three-icon %}fa fa-fw fa-table{% endblock %}"></i>
+            <span class="nav-link-text">{% block navbar-link-three-label %}Tables{% endblock %}</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
+          <a class="nav-link" href="{% block navbar-link-four %}#{% endblock %}">
+            <i class="{% block navbar-link-four-icon %}fa fa-fw fa-link{% endblock %}"></i>
+            <span class="nav-link-text">{% block navbar-link-four-label %}Link{% endblock %}</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link2">
+          <a class="nav-link" href="{% block navbar-link-five %}#{% endblock %}">
+            <i class="{% block navbar-link-five-icon %}fa fa-fw fa-link{% endblock %}"></i>
+            <span class="nav-link-text">{% block navbar-link-five-label %}Link2{% endblock %}</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link3">
+          <a class="nav-link" href="{% block navbar-link-six %}#{% endblock %}">
+            <i class="{% block navbar-link-six-icon %}fa fa-fw fa-link{% endblock %}"></i>
+            <span class="nav-link-text">{% block navbar-link-six-label %}Link3{% endblock %}</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link4">
+          <a class="nav-link" href="{% block navbar-link-seven %}#{% endblock %}">
+            <i class="{% block navbar-link-seven-icon %}fa fa-fw fa-link{% endblock %}"></i>
+            <span class="nav-link-text">{% block navbar-link-seven-label %}Link4{% endblock %}</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link4">
+          <a class="nav-link" href="{% block navbar-link-eight %}#{% endblock %}">
+            <i class="{% block navbar-link-eight-icon %}fa fa-fw fa-link{% endblock %}"></i>
+            <span class="nav-link-text">{% block navbar-link-eight-label %}Link5{% endblock %}</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link4">
+          <a class="nav-link" href="{% block navbar-link-nine %}#{% endblock %}">
+            <i class="{% block navbar-link-nine-icon %}fa fa-fw fa-link{% endblock %}"></i>
+            <span class="nav-link-text">{% block navbar-link-nine-label %}Link5{% endblock %}</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav sidenav-toggler">
+        <li class="nav-item">
+          <a class="nav-link text-center" id="sidenavToggler">
+            <i class="fa fa-fw fa-angle-left"></i>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <!-- Maybe Add Breadcrumbs back in at some point - <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="index.html">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Blank Page</li>
+      </ol>
+      <div class="row">
+        <div class="col-12">
+        </div>
+      </div>
+    </div> -->
+    <!-- /.container-fluid-->
+    {% block content %}
+    {% endblock %}
+    <!-- /.content-wrapper-->
+    <footer class="sticky-footer">
+      <div class="container">
+        <div class="text-center">
+          <small>Copyright © KudelaCorp 2018</small>
+        </div>
+      </div>
+    </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="login.html">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="{% static '/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static '/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="{% static '/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="{% static '/js/sb-admin.min.js' %}"></script>
+    <!-- CDN for jquery datatables -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+  </div>
+</body>
+
+</html>
