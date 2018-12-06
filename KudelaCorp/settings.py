@@ -25,7 +25,7 @@ SECRET_KEY = '1=)v6iz1n)w2@r(oko-r6%pzqp_o)*knpi5+c8q#5%-cu9=l&v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['justinkudela.pythonanywhere.com']
 
 
 # Application definition
@@ -82,9 +82,17 @@ WSGI_APPLICATION = 'KudelaCorp.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
+    #'default': {
+    #    'ENGINE': 'django.db.backends.sqlite3',
+    #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+       'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'JustinKudela$GBSuite',
+        'USER': 'JustinKudela',
+        'PASSWORD': 'wakeforest22',
+        'HOST': 'JustinKudela.mysql.pythonanywhere-services.com',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
     }
 }
 
@@ -124,6 +132,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
+
+STATIC_ROOT = '/home/JustinKudela/KudelaCorp/assets/'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [

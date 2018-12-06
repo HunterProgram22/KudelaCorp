@@ -44,3 +44,4 @@ class Round(models.Model):
         self.differential = ((self.equistrokes - self.course_rating())*113)/self.course_slope()
         self.differential = round(self.differential, 1)
         return self.differential
+
