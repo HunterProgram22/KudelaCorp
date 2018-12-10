@@ -109,12 +109,15 @@ class Annual_income(View):
     '''https://stackoverflow.com/questions/2997433/django-filtering-datetime-field-by-only-the-year-value'''
     '''https://stackoverflow.com/questions/8616343/django-calculate-the-sum-of-the-column-values-through-query'''
     def get(self, request):
-        year_list = MonthInc.objects.all().dates('date', 'year')
-        annual_income_list = []
-        for years in year_list:
-            annual_income_list.append(MonthInc.objects.filter(date__year = years.year))
-
+    #     year_list = MonthInc.objects.all().dates('date', 'year')
+    #     annual_income_list = []
+    #     for years in year_list:
+    #         annual_income_list.append(MonthInc.objects.filter(date__year = years.year))
+    #     for year in annual_income_list:
+    #
+    #
         return render(request, 'Finance/AnnualIncome.html', {})
+
 
 
 class Income(View):

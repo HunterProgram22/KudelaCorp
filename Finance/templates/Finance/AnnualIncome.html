@@ -1,0 +1,312 @@
+{% extends 'Finance/FinanceBase.html' %}
+
+{% load humanize %}
+
+{% block content %}
+<style>
+button, input {
+    padding: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+form {
+    padding: 2px;
+    border: 2px gray solid;
+    width: 325px;
+}
+
+td, th {
+  padding-right: 2px;
+  padding-left: 2px;
+}
+
+.blank_row {
+    height: 10px;
+}
+
+#content {
+  float: left;
+  width: 100px;
+  background-color: #fff;
+  text-align: right;
+  margin-right: 15px;
+}
+#accountnames {
+  float: left;
+  width: 225px;
+  background-color: #fff;
+}
+#cleared {
+  clear: both;
+}
+
+#dollar {
+    float: left;
+}
+#instructions {
+    font-size: 11px;
+    margin: 2px;
+    width: 315px;
+}
+</style>
+<h1>Income Statement</h1>
+
+<div id="searchform">
+<form action="{% url 'Finance_Income' %}" method="POST">{% csrf_token %}
+<select name="month">
+    <option value=''>--Select Month--</option>
+    <option value='1'>January</option>
+    <option value='2'>February</option>
+    <option value='3'>March</option>
+    <option value='4'>April</option>
+    <option value='5'>May</option>
+    <option value='6'>June</option>
+    <option value='7'>July</option>
+    <option value='8'>August</option>
+    <option value='9'>September</option>
+    <option value='10'>October</option>
+    <option value='11'>November</option>
+    <option value='12'>December</option>
+</select>
+<select name="year">
+    <option value=''>--Select Year--</option>
+    <option value='2018'>2018</option>
+    <option value='2017'>2017</option>
+    <option value='2016'>2016</option>
+    <option value='2015'>2015</option>
+    <option value='2014'>2014</option>
+    <option value='2013'>2013</option>
+</select>
+<br>
+<input type="submit">
+</form>
+</div>
+<div id='instructions'>
+    <p>If you select a month and year data for that specific month is shown next
+    to the most current month. Selecting only a month returns all months for any year,
+    (i.e. January returns Jan. 2013, Jan. 2014, Jan. 2015, etc.) and similarly
+    selecting only a year returns all months for that year.</p>
+</div>
+<div>
+<button onclick="myFunction()">Show/Hide Detail</button>
+</div>
+
+    <div id="accountnames">
+        <table width="100%" style="border: 2px solid black;">
+            <tr style="border: 1px solid black;"><th>Date</th></tr>
+            <tr class="detail"><th>Huntington Interest</th></tr>
+            <tr class="detail"><th>Fifth Third Interest</th></tr>
+            <tr class="detail"><th>Capital One Interest</th></tr>
+            <tr class="detail"><th>American Express Interest</th></tr>
+            <tr class="detail"><th>Schwab Interest</th></tr>
+            <tr class="detail"><th>Schwab Dividends</th></tr>
+            <tr class="totalrow"><th>Total Investment Income</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><th>Expense Checks</th></tr>
+            <tr class="detail"><th>Miscellaneous Income</th></tr>
+            <tr class="detail"><th>Refunds/Rebates/Repayment</th></tr>
+            <tr class="detail"><th>Gifts</th></tr>
+            <tr class="totalrow"><th>Total Non-taxable Income</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><th>Supreme Court Salary</th></tr>
+            <tr class="detail"><th>CDM Smith Salary</th></tr>
+            <tr><th>Total Gross Job Income</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><th>TOTAL INCOME (minus R/R/R)</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><th>OPERS Pension</th></tr>
+            <tr class="detail"><th>Ohio 457(b)</th></tr>
+            <tr class="detail"><th>CDM 401(k)</th></tr>
+            <tr><th>Total Pre-tax Savings</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><th>Vanguard Roth IRA</th></tr>
+            <tr class="detail"><th>Robinhood Account</th></tr>
+            <tr class="detail"><th>Schwab Accounts</th></tr>
+            <tr class="detail"><th>American Express Savings</th></tr>
+            <tr class="detail"><th>Fifth Third Savings</th></tr>
+            <tr class="detail"><th>Capital One Savings</th></tr>
+            <tr class="detail"><th>529 College Savings</th></tr>
+            <tr class="detail"><th>Huntington Savings</th></tr>
+            <tr><th>Total Post-tax Savings</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><th>TOTAL SAVINGS</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><th>Federal Tax</th></tr>
+            <tr class="detail"><th>Social Security</th></tr>
+            <tr class="detail"><th>Medicare</th></tr>
+            <tr class="detail"><th>Ohio Tax</th></tr>
+            <tr class="detail"><th>Columbus Tax</th></tr>
+            <tr><th>Total Taxes</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><th>Health Insurance</th></tr>
+            <tr class="detail"><th>Supplemental Life Insurance</th></tr>
+            <tr class="detail"><th>Flex Spending Accounts</th></tr>
+            <tr class="detail"><th>CDM STD</th></tr>
+            <tr class="detail"><th>CDM Supplemental LTD</th></tr>
+            <tr class="detail"><th>Parking</th></tr>
+            <tr class="detail"><th>Parking Admin</th></tr>
+            <tr><th>Total Insurance</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><th>TOTAL DEDUCTIONS</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><th>NET INCOME</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><th>Mortgage</th></tr>
+            <tr class="detail"><th>HOA Fees</th></tr>
+            <tr><th>Total Home Costs</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><th>Auto Insurance</th></tr>
+            <tr class="detail"><th>AEP Electric</th></tr>
+            <tr class="detail"><th>Rumpke Trash</th></tr>
+            <tr class="detail"><th>Delaware Sewer</th></tr>
+            <tr class="detail"><th>Delco Water</th></tr>
+            <tr class="detail"><th>Suburban Gas</th></tr>
+            <tr class="detail"><th>Verizon Phone</th></tr>
+            <tr class="detail"><th>Sprint Phone</th></tr>
+            <tr class="detail"><th>DirecTv Cable</th></tr>
+            <tr class="detail"><th>TimeWarner Internet</th></tr>
+            <tr><th>Total Utilities</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><th>Auto Loan</th></tr>
+            <tr class="detail"><th>Government Student Loan</th></tr>
+            <tr class="detail"><th>Private Student Loan</th></tr>
+            <tr><th>Total Loans</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><th>Capital One CC</th></tr>
+            <tr class="detail"><th>American Express CC</th></tr>
+            <tr class="detail"><th>Discover CC</th></tr>
+            <tr class="detail"><th>Stores CC</th></tr>
+            <tr class="detail"><th>Kat Work CC</th></tr>
+            <tr><th>Total Credit Cards</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><th>Cash/Check Purchases</th></tr>
+            <tr class="detail"><th>Daycare</th></tr>
+            <tr class="detail"><th>Tax Deductible Giving</th></tr>
+            <tr><th>Total Cash, Checks, Charity</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><th>TOTAL EXPENDITURES</th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><th>MONTHLY SURPLUS/DEFICIT</th></tr>
+        </table>
+    </div>
+
+    {% for field in month_income %}
+    <div id="content">
+        <table width="100%" style="border: 2px solid black; padding: 2px;">
+
+            <tr style="text-align: center; border: 1px solid black;"><td>
+            <b>{{ field.date | date:"M Y" }}</b>
+            </td></tr>
+            <tr class="detail"><td>{{ field.huntington_interest | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.fifththird_interest | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.capone_interest | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.amex_interest | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.schwab_interest | intcomma }}</td></tr>
+            <tr class="detail"><td><u>{{ field.schwab_dividends| intcomma }}</u></td></tr>
+            <tr class="totalrow"><td><b><span id="dollar">$</span>{{ field.total_investment | intcomma }}</b></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><td>{{ field.expense_checks | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.miscellaneous_income | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.refund_rebate_repayment| intcomma }}</td></tr>
+            <tr class="detail"><td><u>{{ field.gift_income | intcomma }}</u></td></tr>
+            <tr class="totalrow"><td><b><span id="dollar">$</span>{{ field.total_nontaxable_income | intcomma }}</b></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><td>{{ field.supremecourt_salary | intcomma }}</td></tr>
+            <tr class="detail"><td><u>{{ field.cdm_salary | intcomma }}</u></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.total_grossjob_income | intcomma }}</b></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.total_all_income | intcomma }}</b></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><td>{{ field.opers_retirement | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.four57b_retirement | intcomma }}</td></tr>
+            <tr class="detail"><td><u>{{ field.four01k_retirement | intcomma }}</u></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.total_pretax_savings | intcomma }}</b></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><td>{{ field.roth_retirement | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.robinhood_investments | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.schwab_investments | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.amex_savings| intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.fifththird_savings | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.capone_savings | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.five29_college | intcomma }}</td></tr>
+            <tr class="detail"><td><u>{{ field.huntington_savings | intcomma }}</u></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.total_posttax_savings | intcomma }}</b></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.total_allsavings | intcomma }}</b></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><td>{{ field.federal_tax | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.social_security | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.medicare | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.ohio_tax | intcomma }}</td></tr>
+            <tr class="detail"><td><u>{{ field.columbus_tax | intcomma }}</u></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.total_taxes | intcomma }}</b></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><td>{{ field.health_insurance | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.supplementallife_insurance | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.flex_spending | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.cdm_std | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.cdmsupplemental_ltd | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.parking | intcomma }}</td></tr>
+            <tr class="detail"><td><u>{{ field.parking_admin | intcomma }}</u></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.total_insurance | intcomma }}</b></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.total_deductions | intcomma }}</b></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.net_income | intcomma }}</b></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><td>{{ field.main_mortgage | intcomma }}</td></tr>
+            <tr class="detail"><td><u>{{ field.hoa_fees | intcomma }}</u></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.total_homecosts | intcomma }}</b></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><td>{{ field.auto_insurance | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.aep_electric | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.rumpke_trash | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.delaware_sewer | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.delco_water | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.suburban_gas | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.verizon_kat | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.sprint_justin | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.directtv_cable | intcomma }}</td></tr>
+            <tr class="detail"><td><u>{{ field.timewarner_internet | intcomma }}</u></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.total_utilities | intcomma }}</b></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><td>{{ field.caponeauto_loan | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.public_loan | intcomma }}</td></tr>
+            <tr class="detail"><td><u>{{ field.private_loan | intcomma }}</u></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.total_loans | intcomma }}</b></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><td>{{ field.capone_creditcard | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.amex_creditcard | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.discover_creditcard | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.kohls_vicsec_macy_eddiebauer_creditcards | intcomma }}</td></tr>
+            <tr class="detail"><td><u>{{ field.katwork_creditcard | intcomma }}</u></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.total_creditcards | intcomma }}</b></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr class="detail"><td>{{ field.cashorcheck_purchases | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ field.daycare | intcomma }}</td></tr>
+            <tr class="detail"><td><u>{{ field.taxdeductible_giving | intcomma }}</u></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.total_cashorcheck | intcomma }}</b></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.total_expenditures | intcomma }}</b></td></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.total_surplus | intcomma }}</b></td></tr>
+
+        </table>
+    </div>
+
+    <script>
+    function myFunction() {
+    var x = document.getElementsByClassName('detail');
+    var i;
+    for (i = 0; i < x.length; i++){
+        if (x[i].style.display === 'none') {
+            x[i].style.display = 'table-row';
+        } else {
+            x[i].style.display = 'none';
+        }
+    }
+    }
+    </script>
+    {% endfor %}
+{% endblock %}
