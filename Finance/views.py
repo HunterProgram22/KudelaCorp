@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
+from django.db.models import Sum
 from .forms import MonthBalForm, MonthIncForm, TaxReturnForm
 from .models import MonthBal, MonthInc, TaxReturn
 from .functions import report, get_report_criteria, get_analysis_data
@@ -109,13 +110,33 @@ class Annual_income(View):
     '''https://stackoverflow.com/questions/2997433/django-filtering-datetime-field-by-only-the-year-value'''
     '''https://stackoverflow.com/questions/8616343/django-calculate-the-sum-of-the-column-values-through-query'''
     def get(self, request):
-    #     year_list = MonthInc.objects.all().dates('date', 'year')
-    #     annual_income_list = []
-    #     for years in year_list:
-    #         annual_income_list.append(MonthInc.objects.filter(date__year = years.year))
-    #     for year in annual_income_list:
-    #
-    #
+        elif request.POST.get("year") != '':
+            year = request.POST.get("year")
+            month_income = MonthInc.objects.filter(date__year=year).order_by('date')
+
+
+
+        years = MonthInc.objects.all().dates('date', 'year')
+        year_list = []
+        for year in years:
+            x = str(year).split('-')
+            year_list.append(x[0])
+        fields = MonthInc._meta.get_fields()[2:]
+        clean_field_list = []
+        for field in fields:
+            clean_field_list.append(str(field).split('.')[2])
+
+
+
+        for field in clean_field_list:
+            MonthInc.objects.values('date__year').annotate(Sum(field))
+
+        # annual_income_list = []
+        # for years in year_list:
+        #     annual_income_list.append(MonthInc.objects.filter(date__year = years.year))
+        #
+        # for year in year_list:
+        #     MonthInc.objects.filter(date__year = year.year).aggregate(Sum('huntington_interest'))
         return render(request, 'Finance/AnnualIncome.html', {})
 
 

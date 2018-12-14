@@ -50,25 +50,10 @@ td, th {
     width: 315px;
 }
 </style>
-<h1>Income Statement</h1>
+<h1>Annual Income Statement</h1>
 
 <div id="searchform">
-<form action="{% url 'Finance_Income' %}" method="POST">{% csrf_token %}
-<select name="month">
-    <option value=''>--Select Month--</option>
-    <option value='1'>January</option>
-    <option value='2'>February</option>
-    <option value='3'>March</option>
-    <option value='4'>April</option>
-    <option value='5'>May</option>
-    <option value='6'>June</option>
-    <option value='7'>July</option>
-    <option value='8'>August</option>
-    <option value='9'>September</option>
-    <option value='10'>October</option>
-    <option value='11'>November</option>
-    <option value='12'>December</option>
-</select>
+<form action="{% url 'Finance_AnnualIncome' %}" method="POST">{% csrf_token %}
 <select name="year">
     <option value=''>--Select Year--</option>
     <option value='2018'>2018</option>
@@ -83,10 +68,7 @@ td, th {
 </form>
 </div>
 <div id='instructions'>
-    <p>If you select a month and year data for that specific month is shown next
-    to the most current month. Selecting only a month returns all months for any year,
-    (i.e. January returns Jan. 2013, Jan. 2014, Jan. 2015, etc.) and similarly
-    selecting only a year returns all months for that year.</p>
+    <p>Fill later.</p>
 </div>
 <div>
 <button onclick="myFunction()">Show/Hide Detail</button>
