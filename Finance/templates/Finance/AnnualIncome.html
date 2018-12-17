@@ -173,15 +173,17 @@ td, th {
         </table>
     </div>
 
-    {% for field in month_income %}
+
+
+
+
     <div id="content">
         <table width="100%" style="border: 2px solid black; padding: 2px;">
+      {% for field in this_year %}
+            <tr style="text-align: center; border: 1px solid black;"><td></td></tr>
 
-            <tr style="text-align: center; border: 1px solid black;"><td>
-            <b>{{ field.date | date:"M Y" }}</b>
-            </td></tr>
-            <tr class="detail"><td>{{ field.huntington_interest | intcomma }}</td></tr>
-            <tr class="detail"><td>{{ field.fifththird_interest | intcomma }}</td></tr>
+            <tr class="detail"><td>{{ this_year.field }}</td></tr>
+            <!-- <tr class="detail"><td>{{ field.fifththird_interest | intcomma }}</td></tr>
             <tr class="detail"><td>{{ field.capone_interest | intcomma }}</td></tr>
             <tr class="detail"><td>{{ field.amex_interest | intcomma }}</td></tr>
             <tr class="detail"><td>{{ field.schwab_interest | intcomma }}</td></tr>
@@ -272,7 +274,7 @@ td, th {
             <tr class="blank_row"><td></td></tr>
             <tr><td><b><span id="dollar">$</span>{{ field.total_expenditures | intcomma }}</b></td></tr>
             <tr class="blank_row"><td></td></tr>
-            <tr><td><b><span id="dollar">$</span>{{ field.total_surplus | intcomma }}</b></td></tr>
+            <tr><td><b><span id="dollar">$</span>{{ field.total_surplus | intcomma }}</b></td></tr> -->
 
         </table>
     </div>
