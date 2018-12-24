@@ -76,7 +76,7 @@ td, th {
 
     <div id="accountnames">
         <table width="100%" style="border: 2px solid black;">
-            <!--<tr style="border: 1px solid black;"><th>Date</th></tr>-->
+            <tr style="border: 1px solid black;"><th>Year</th></tr>
             <tr class="detail"><th>Huntington Interest</th></tr>
             <tr class="detail"><th>Fifth Third Interest</th></tr>
             <tr class="detail"><th>Capital One Interest</th></tr>
@@ -147,9 +147,9 @@ td, th {
         <table width="100%" style="border: 2px solid black; padding: 2px;">
 
 
-              <!--<tr style="text-align: center; border: 1px solid black;"><td>
-            <b>{{ field.date | date:"Y" }}</b>
-            </td></tr>-->
+            <tr style="text-align: center; border: 1px solid black;"><td>
+            <b>{{ year | date:"Y" }}</b>
+            </td></tr>
 
             {% for key, value in dictionary.items %}
             <tr class="detail">
