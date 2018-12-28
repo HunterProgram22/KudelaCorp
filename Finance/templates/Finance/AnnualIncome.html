@@ -120,10 +120,10 @@ td, th {
             <tr class="detail"><th>Delaware Sewer</th></tr>
             <tr class="detail"><th>Delco Water</th></tr>
             <tr class="detail"><th>Suburban Gas</th></tr>
-            <tr class="detail"><th>Verizon Phone</th></tr>
-            <tr class="detail"><th>Sprint Phone</th></tr>
-            <tr class="detail"><th>DirecTv Cable</th></tr>
-            <tr class="detail"><th>TimeWarner Internet</th></tr>
+            <tr class="detail"><th>Kat Phone</th></tr>
+            <tr class="detail"><th>Justin Phone</th></tr>
+            <tr class="detail"><th>TV (Cable, Netflix)</th></tr>
+            <tr class="detail"><th>Internet</th></tr>
             <tr class="detail"><th>Auto Loan</th></tr>
             <tr class="detail"><th>Government Student Loan</th></tr>
             <tr class="detail"><th>Private Student Loan</th></tr>
@@ -154,7 +154,7 @@ td, th {
             {% for key, value in dictionary.items %}
             <tr class="detail">
 
-              <td>{{ value | floatformat:2 }}</td>
+              <td>{{ value | floatformat:2 | intcomma }}</td>
 
             </tr>
             {% endfor %}
