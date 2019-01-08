@@ -83,7 +83,7 @@ class Balance(View):
             month_balance.append(add_month[0])
         elif request.POST.get("month") != '':
             month = request.POST.get("month")
-            month_balance = MonthBal.objects.filter(date__month=month).order_by('date')
+            month_balance = MonthBal.objects.filter(date__month=month).order_by('-date')
         elif request.POST.get("year") != '':
             year = request.POST.get("year")
             month_balance = MonthBal.objects.filter(date__year=year).order_by('date')
