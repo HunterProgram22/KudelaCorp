@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import Home, Manage, Balance, Balance_new, Income, Annual_income, Income_new, \
-    Cash, Analysis, Reports, Tax_new, Taxes
+    Cash, Analysis, Reports, Tax_new, Taxes, Metrics
 from django.contrib.auth.decorators import login_required
 
 
@@ -16,5 +16,6 @@ urlpatterns = [
         path('Finance/Cash', login_required(Cash.as_view()), name='Finance_Cash'),
         path('Finance/Tax_new', login_required(Tax_new.as_view()), name='Finance_TaxNew'),
         path('Finance/Taxes', login_required(Taxes.as_view()), name='Finance_Taxes'),
+        path('Finance/Metrics', login_required(Metrics.as_view()), name='Finance_Metrics'),
         path('', login_required(Home.as_view()), name='Finance_Home'),
     ]

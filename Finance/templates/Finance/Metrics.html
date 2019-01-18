@@ -1,0 +1,57 @@
+{% extends 'Finance/FinanceBase.html' %}
+
+{% load humanize %}
+
+{% block content %}
+<head>
+<style>
+
+table {
+    border: 2px black solid;
+    width: 100%;
+}
+
+td, th {
+    text-align: right;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.heading {
+    text-align: left;
+    width: auto;
+}
+s
+.toprow, .bottomrow {
+    border: 1px solid black;
+}
+
+#sigblock {
+    line-height: 14px;
+}
+
+@media(min-width:768px) {
+#reportsheet {
+    width: 700px;
+}
+}
+</style>
+
+
+</head>
+
+<body>
+<h1>Metrics</h1>
+<div id="searchform">
+<form action="{% url 'Finance_Reports' %}" method="POST">{% csrf_token %}
+<select name="quarter">
+    <option value=''>--Select Metric--</option>
+    <option value='4/2018'>4th Quarter 2018</option>
+</select>
+<br>
+<input type="submit">
+</form>
+</div>
+
+</body>
+{% endblock %}

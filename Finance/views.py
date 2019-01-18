@@ -223,3 +223,9 @@ class Taxes(View):
         tax_returns = tax_returns[::-1]
         context = {'tax_returns': tax_returns}
         return render(request, 'Finance/Taxreturns.html', context)
+
+
+class Metrics(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'Finance/Metrics.html', context)
