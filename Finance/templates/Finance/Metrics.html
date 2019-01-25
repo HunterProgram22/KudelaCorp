@@ -43,10 +43,14 @@ s
 <body>
 <h1>Metrics</h1>
 <div id="searchform">
-<form action="{% url 'Finance_Reports' %}" method="POST">{% csrf_token %}
-<select name="quarter">
+<form action="{% url 'Finance_Metrics' %}" method="POST">{% csrf_token %}
+<select name="ratio">
     <option value=''>--Select Metric--</option>
-    <option value='4/2018'>4th Quarter 2018</option>
+    <option value='CUR'>Current Ratio</option>
+    <option value='LIQ'>Liquidity Ratio</option>
+    <option value='LEV'>Leverage Ratio</option>
+    <option value='DTI'>Debt-to-Income Ratio</option>
+    <option value='STI'>Savings-to-Income Ratio</option>
 </select>
 <br>
 <input type="submit">

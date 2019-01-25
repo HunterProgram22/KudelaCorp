@@ -3,7 +3,7 @@ from django.views import View
 from django.db.models import Sum
 from .forms import MonthBalForm, MonthIncForm, TaxReturnForm
 from .models import MonthBal, MonthInc, TaxReturn
-from .functions import report, get_report_criteria, get_analysis_data
+from .functions import report, get_report_criteria, get_analysis_data, get_metric_data
 
 
 class Home(View):
@@ -227,5 +227,10 @@ class Taxes(View):
 
 class Metrics(View):
     def get(self, request):
+        context = {}
+        return render(request, 'Finance/Metrics.html', context)
+
+    def post(self, request):
+        ratio = get_metric_data(request)
         context = {}
         return render(request, 'Finance/Metrics.html', context)

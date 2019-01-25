@@ -71,3 +71,8 @@ def get_analysis_data(monthly_data, category):
         amount = getattr(item, category)
         send_data.append((month, amount))
     return send_data
+
+
+def get_metric_data(request):
+    ratio = request.POST.get("ratio")
+    print(ratio)
