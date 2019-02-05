@@ -9,6 +9,7 @@ def report(quarter, year):
     networth, loanbalance, savingsbalance = get_quarter_balance(qmonthbal, qyearbal)
     return (creditcards, utilities, loans, savings, surplus, networth, loanbalance, savingsbalance)
 
+
 def get_report_criteria(request):
     quarter = request.POST.get("quarter")[0]
     year = request.POST.get("quarter")[2:]
@@ -23,6 +24,7 @@ def get_report_criteria(request):
     last_quarter_report_name = lastquarter_month + "Q " + lastquarter_year
     return (quarter, year, lastquarter_month, lastquarter_year, \
         quarter_report_name, last_quarter_report_name, yearago_report_name)
+
 
 def get_quarter_months(quarter, year):
     '''monthbal is set to month after end of quarter
@@ -73,6 +75,15 @@ def get_analysis_data(monthly_data, category):
     return send_data
 
 
-def get_metric_data(request):
+def get_metric_ratio(request):
     ratio = request.POST.get("ratio")
-    print(ratio)
+    monthbal = get_ratio_data(ratio)
+    return(ratio, monthbal)
+
+def get_ratio_data(ratio):
+    if ratio == "CUR":
+        monthstart = "1"
+        year = "2019"
+        month = MonthBal.objects.filter(date__year=year).filter(
+            date__month=monthstart)
+        return(month)

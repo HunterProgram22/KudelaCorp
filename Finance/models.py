@@ -75,6 +75,9 @@ class MonthBal(models.Model):
         def networth(self):
             return (self.total_assets() - self.total_liabilities())
 
+        def total_current_assets(self):
+            return(self.current_cash() + self.total_invest())
+
 
 class MonthInc(models.Model):
     date = models.DateField()
