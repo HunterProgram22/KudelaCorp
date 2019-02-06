@@ -258,3 +258,7 @@ class TaxReturn(models.Model):
 
     def state_tax_rate(self):
         return (self.total_state_tax_owed / self.state_taxable_income)*100
+
+class MetricConstants(models.Model):
+        date = models.DateField()
+        value = models.DecimalField(max_digits=8, decimal_places=2)

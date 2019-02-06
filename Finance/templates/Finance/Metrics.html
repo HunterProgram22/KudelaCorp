@@ -11,19 +11,29 @@ table {
     width: 100%;
 }
 
-td, th {
+th {
     text-align: left;
     padding-left: 2px;
     padding-right: 2px;
 }
 
+td {
+    text-align: right;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
 .heading {
-    text-align: left;
+    text-align: center;
     width: auto;
 }
 s
 .toprow, .bottomrow {
     border: 1px solid black;
+}
+
+.blank_row {
+    height: 10px;
 }
 
 #sigblock {
@@ -75,7 +85,7 @@ s
 
     <div id="accountnames">
         <table width="100%" style="border: 2px solid black;">
-            <tr style="border: 1px solid black;"><th>Date</th></tr>
+            <tr style="border: 2px solid black;"><th>Date</th></tr>
             {% if ratio == "CUR" %}
             <tr><th>Huntington Checking</th></tr>
             <tr><th>Fifth Third Checking</th></tr>
@@ -84,12 +94,14 @@ s
             <tr><th>Ally Bank Savings</th></tr>
             <tr><th>American Express Savings</th></tr>
             <tr><th><b>Total Cash<b></th></tr>
+            <tr class="blank_row"><td></td></tr>
             <tr><th>Options Accounts</th></tr>
             <tr><th>Dividend (Deacon) Schwab</th></tr>
             <tr><th>Broad (Buckeye) Schwab</th></tr>
             <tr><th><b>Total Marketable Securities<b></th></tr>
-            <br>
-            <tr><th><b>Total Current Assets<b></th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr style="border: 1px solid black;"><th><b>Total Current Assets<b></th></tr>
+            <tr><th><b>Total Credit Card Balances<b></th></tr>
             {% else %}
             <tr><th>Other Ratio</th></tr>
             {% endif %}
@@ -99,7 +111,7 @@ s
     <div id="content">
         <table width="100%" style="border: 2px solid black;">
           {% for field in month_balance %}
-            <tr style="border: 1px solid black;"><td>{{ field.date | date:"M Y" }}</td></tr>
+            <tr style="border: 1px solid black;"><td class="heading">{{ field.date | date:"M Y" }}</td></tr>
             {% if ratio == "CUR" %}
               <tr class="detail"><td>{{ field.huntington_check | intcomma }}</td></tr>
               <tr class="detail"><td>{{ field.fifththird_check | intcomma }}</td></tr>
@@ -108,12 +120,14 @@ s
               <tr class="detail"><td>{{ field.capone_save | intcomma }}</td></tr>
               <tr class="detail"><td>{{ field.amex_save | intcomma }}</td></tr>
               <tr class="detail"><td><b>{{ field.current_cash | intcomma }}<b></td></tr>
+              <tr class="blank_row"><td></td></tr>
               <tr class="detail"><td>{{ field.robinhood_invest | intcomma }}</td></tr>
               <tr class="detail"><td>{{ field.deacon_invest | intcomma }}</td></tr>
               <tr class="detail"><td>{{ field.buckeye_invest | intcomma }}</td></tr>
               <tr class="detail"><td><b>{{ field.total_invest | intcomma }}<b></td></tr>
-              <br>
-              <tr class="detail"><td><b>{{ field.total_current_assets | intcomma }}<b></td></tr>
+              <tr class="blank_row"><td></td></tr>
+              <tr style="border: 1px solid black;" class="detail"><td><b>{{ field.total_current_assets | intcomma }}<b></td></tr>
+              <tr class="detail"><td><b>{{ field.total_credit | intcomma }}<b></td></tr>
             {% else %}
               <tr class="detail"><td>{{ field.amex_save | intcomma }}</td></tr>
             {% endif %}
