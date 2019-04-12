@@ -236,9 +236,9 @@ class TaxReturn(models.Model):
     total_income = models.DecimalField(max_digits=10, decimal_places=2)
     adjusted_gross_income = models.DecimalField(max_digits=10, decimal_places=2)
     itemized_deduction_total = models.DecimalField(max_digits=10, decimal_places=2)
-    exemptions = models.DecimalField(max_digits=10, decimal_places=2)
+    #exemptions = models.DecimalField(max_digits=10, decimal_places=2)
     federal_taxable_income = models.DecimalField(max_digits=10, decimal_places=2)
-    credits = models.DecimalField(max_digits=10, decimal_places=2)
+    #credits = models.DecimalField(max_digits=10, decimal_places=2)
     total_federal_tax_owed = models.DecimalField(max_digits=10, decimal_places=2)
     total_federal_payments = models.DecimalField(max_digits=10, decimal_places=2)
 

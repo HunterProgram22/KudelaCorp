@@ -97,6 +97,12 @@
             <span class="nav-link-text">{% block navbar-link-ten-label %}Link5{% endblock %}</span>
           </a>
         </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link4">
+          <a class="nav-link" href="{% block navbar-link-eleven %}#{% endblock %}">
+            <i class="{% block navbar-link-eleven-icon %}fa fa-fw fa-link{% endblock %}"></i>
+            <span class="nav-link-text">{% block navbar-link-eleven-label %}Link5{% endblock %}</span>
+          </a>
+        </li>
       </ul>
       <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item">
@@ -155,7 +161,7 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary" href="{% url 'KudelaCorpHome' %}">Logout</a>
           </div>
         </div>
       </div>

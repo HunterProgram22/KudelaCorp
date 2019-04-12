@@ -221,7 +221,7 @@ class Tax_new(View):
 class Taxes(View):
     def get(self, request):
         tax_returns = TaxReturn.objects.order_by('-year')
-        tax_returns = tax_returns[::-1]
+        #tax_returns = tax_returns[::-1]
         context = {'tax_returns': tax_returns}
         return render(request, 'Finance/Taxreturns.html', context)
 
