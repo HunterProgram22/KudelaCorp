@@ -50,7 +50,9 @@ td, th {
             <tr><th>Adjusted Gross Income (AGI)</th></tr>
             <tr class="blank_row"><td></td></tr>
             <tr><th>Total Deductions</th></tr>
+            <tr><th>Exemptions</th></tr>
             <tr><th>Federal Taxable Income</th></tr>
+            <tr><th>Credits</th></tr>
             <tr><th>Federal Tax Owed</th></tr>
             <tr><th>Federal Tax Payments</th></tr>
             <tr class="blank_row"><td></td></tr>
@@ -81,7 +83,9 @@ td, th {
             <tr><td>{{ field.adjusted_gross_income | intcomma }}</td></tr>
             <tr class="blank_row"><td></td></tr>
             <tr><td>{{ field.itemized_deduction_total | intcomma }}</td></tr>
+            <tr><td>{{ field.exemptions | intcomma }}</td></tr>
             <tr><td>{{ field.federal_taxable_income | intcomma }}</td></tr>
+            <tr><td>{{ field.credits | intcomma }}</td></tr>
             <tr><td>{{ field.total_federal_tax_owed| intcomma }}</td></tr>
             <tr><td>{{ field.total_federal_payments | intcomma }}</td></tr>
             <tr class="blank_row"><td></td></tr>

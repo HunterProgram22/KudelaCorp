@@ -81,7 +81,7 @@ def get_metric_ratio(request):
     return(ratio, monthbal)
 
 def get_ratio_data(ratio):
-    if ratio == "CUR":
+    if ratio in ("CUR", "LIQ"):
         monthstart = "1"
         year = "2019"
         month = MonthBal.objects.filter(date__year=year).filter(

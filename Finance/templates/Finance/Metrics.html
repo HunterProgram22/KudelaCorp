@@ -86,7 +86,7 @@ s
     <div id="accountnames">
         <table width="100%" style="border: 2px solid black;">
             <tr style="border: 2px solid black;"><th>Date</th></tr>
-            {% if ratio == "CUR" %}
+            {% if ratio == "CUR" or ratio == "LIQ" %}
             <tr><th>Huntington Checking</th></tr>
             <tr><th>Fifth Third Checking</th></tr>
             <tr><th>Huntington Savings</th></tr>
@@ -95,14 +95,35 @@ s
             <tr><th>American Express Savings</th></tr>
             <tr><th><b>Total Cash<b></th></tr>
             <tr class="blank_row"><td></td></tr>
+            {% endif %}
+            {% if ratio == "CUR" %}
             <tr><th>Options Accounts</th></tr>
             <tr><th>Dividend (Deacon) Schwab</th></tr>
             <tr><th>Broad (Buckeye) Schwab</th></tr>
             <tr><th><b>Total Marketable Securities<b></th></tr>
             <tr class="blank_row"><td></td></tr>
-            <tr style="border: 1px solid black;"><th><b>Total Current Assets<b></th></tr>
-            <tr><th><b>Total Credit Card Balances<b></th></tr>
-            {% else %}
+            <tr><th><b>Total Current Assets<b></th></tr>
+            <tr><th><b>Total Credit Card Balances</b></th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><th><b>Total 12-Month Loans Due<b></th></tr>
+            {% elif ratio == "LIQ" %}
+            <tr><th>Mortgage</th></tr>
+            <tr><th>HOA Fees</th></tr>
+            <tr><th><b>Home Costs<b></th></tr>
+            <tr class="blank_row"><td></td></tr>
+            <tr><th>Auto Insurance</th></tr>
+            <tr><th>Electric</th></tr>
+            <tr><th>Trash</th></tr>
+            <tr><th>Sewer</th></tr>
+            <tr><th>Water</th></tr>
+            <tr><th>Gas</th></tr>
+            <tr><th>Kat Phone</th></tr>
+            <tr><th>Justin Phone</th></tr>
+            <tr><th>Television</th></tr>
+            <tr><th>Internet</th></tr>
+            <tr><th>Daycare</th></tr>
+            <tr><th><b>Average Monthly Bills<b></th></tr>
+            <tr class="blank_row"><td></td></tr>
             <tr><th>Other Ratio</th></tr>
             {% endif %}
         </table>
@@ -111,8 +132,8 @@ s
     <div id="content">
         <table width="100%" style="border: 2px solid black;">
           {% for field in month_balance %}
-            <tr style="border: 1px solid black;"><td class="heading">{{ field.date | date:"M Y" }}</td></tr>
-            {% if ratio == "CUR" %}
+            <tr style="border: 2px solid black;"><td class="heading"><b>{{ field.date | date:"M Y" }}</b></td></tr>
+            {% if ratio == "CUR" or ratio == "LIQ" %}
               <tr class="detail"><td>{{ field.huntington_check | intcomma }}</td></tr>
               <tr class="detail"><td>{{ field.fifththird_check | intcomma }}</td></tr>
               <tr class="detail"><td>{{ field.huntington_save | intcomma }}</td></tr>
@@ -121,13 +142,17 @@ s
               <tr class="detail"><td>{{ field.amex_save | intcomma }}</td></tr>
               <tr class="detail"><td><b>{{ field.current_cash | intcomma }}<b></td></tr>
               <tr class="blank_row"><td></td></tr>
+              {% endif %}
+              {% if ratio == "CUR" %}
               <tr class="detail"><td>{{ field.robinhood_invest | intcomma }}</td></tr>
               <tr class="detail"><td>{{ field.deacon_invest | intcomma }}</td></tr>
               <tr class="detail"><td>{{ field.buckeye_invest | intcomma }}</td></tr>
               <tr class="detail"><td><b>{{ field.total_invest | intcomma }}<b></td></tr>
               <tr class="blank_row"><td></td></tr>
-              <tr style="border: 1px solid black;" class="detail"><td><b>{{ field.total_current_assets | intcomma }}<b></td></tr>
+              <tr><td><b>{{ field.total_current_assets | intcomma }}<b></td></tr>
               <tr class="detail"><td><b>{{ field.total_credit | intcomma }}<b></td></tr>
+              <tr class="blank_row"><td></td></tr>
+              <tr><td><b>{{ field.total_current_assets | intcomma }}<b></td></tr>
             {% else %}
               <tr class="detail"><td>{{ field.amex_save | intcomma }}</td></tr>
             {% endif %}
