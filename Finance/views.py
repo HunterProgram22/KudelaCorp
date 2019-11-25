@@ -157,7 +157,7 @@ class Income(View):
             month_income.append(add_month[0])
         elif request.POST.get("month") != '':
             month = request.POST.get("month")
-            month_income = MonthInc.objects.filter(date__month=month).order_by('date')
+            month_income = MonthInc.objects.filter(date__month=month).order_by('-date')
         elif request.POST.get("year") != '':
             year = request.POST.get("year")
             month_income = MonthInc.objects.filter(date__year=year).order_by('date')

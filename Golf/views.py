@@ -102,7 +102,7 @@ class Handicap(View):
             #There is probably a more efficient way to do this instead of copying the list each time (yield? enumerate?)
             diffUsed9 = diffList9[:]
             if round_count9 > 20:
-                diffUsed9 = diffUsed9[(round_count9-20):round_count]
+                diffUsed9 = diffUsed9[(round_count9-20):round_count9]
             handicapTotal9 = calcHandicap((round_count9), diffUsed9)
             round_handicap9.append((round9, round9.handicap_diff(), handicapTotal9))
         return round_handicap9
